@@ -6,11 +6,13 @@ namespace Imobiliaria.Classes
     {
       private int IdImovel { get; set; }
       private long CpfProprietario { get; set; }
+      private Situacao Situacao { get; set; }
 
-      public Imovel(long cpfProprietario, int cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais)
+      public Imovel(long cpfProprietario, Situacao situacao, int cep, string logradouro, int? numero, string complemento, string bairro, string cidade, string estado, string pais, bool excluido = false)
       {
          this.IdImovel = ProximoId();
          this.CpfProprietario = cpfProprietario;
+         this.Situacao = situacao;
          this.Cep = cep;
          this.Logradouro = logradouro;
          this.Numero = numero;
@@ -19,12 +21,20 @@ namespace Imobiliaria.Classes
          this.Cidade = cidade;
          this.Estado = estado;
          this.Pais = pais;
-         this.Excluido = false;
+         this.Excluido = excluido;
       }
 
+      public long RetornaIdImovel()
+      {
+         return this.IdImovel;
+      }
       public long RetornaCpfProprietario()
       {
          return this.CpfProprietario;
+      }
+      public Situacao RetornaSituacao()
+      {
+         return this.Situacao;
       }
 
       public int ProximoId()

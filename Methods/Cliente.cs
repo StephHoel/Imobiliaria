@@ -37,14 +37,16 @@ namespace Imobiliaria
             string orgaouf = Input.OrgaoUF("Órgão Expedidor/UF: ");
 
 
-            DateTime dataNasc = new(); // DateTime
+            DateTime dataNasc = new();
             string naturalidade = "";
             string nacionalidade = "";
             string pai = "";
             string mae = "";
+            EstadoCivil estadoCivil = new();
+            FichaRapida fichaRapida = new();
             string email = "";
 
-            Pessoa cliente = new(cpf, nome, rg, orgaouf, dataNasc, naturalidade, nacionalidade, pai, mae, email);
+            Pessoa cliente = new(cpf, nome, rg, orgaouf, dataNasc, naturalidade, nacionalidade, pai, mae, estadoCivil, fichaRapida, email);
 
 
 

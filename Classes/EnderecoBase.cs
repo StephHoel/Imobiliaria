@@ -4,7 +4,7 @@ namespace Imobiliaria.Classes
     {
       protected internal int Cep { get; set; }
       protected internal string Logradouro { get; set; }
-      protected internal int Numero { get; set; }
+      protected internal int? Numero { get; set; }
       protected internal string Complemento { get; set; }
       protected internal string Bairro { get; set; }
       protected internal string Cidade { get; set; }
@@ -20,7 +20,7 @@ namespace Imobiliaria.Classes
       {
          return this.Logradouro;
       }
-      public int RetornaNumero()
+      public int? RetornaNumero()
       {
          return this.Numero;
       }

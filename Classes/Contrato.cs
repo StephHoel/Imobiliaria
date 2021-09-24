@@ -16,16 +16,16 @@ namespace Imobiliaria.Classes
       private bool Finalizado { get; set; }
       private bool Excluido { get; set; }
 
-      public Contrato(long cpfLocatario, int idImovel, DateTime dataInicio, DateTime dataFim, double valorInicial, int vencimento)
+      public Contrato(long cpfLocatario, int idImovel, DateTime dataInicio, DateTime dataFim, double valorInicial, int vencimento, bool finalizado = false, bool excluido = false)
       {
-         this.CpfLocatario = cpfLocatario; 
+         this.CpfLocatario = cpfLocatario;
          this.IdImovel = idImovel;
          this.DataInicio = dataInicio;
          this.DataFim = dataFim;
          this.ValorInicial = valorInicial;
          this.Vencimento = vencimento;
-         this.Finalizado = false;
-         this.Excluido = false;
+         this.Finalizado = finalizado;
+         this.Excluido = excluido;
 
       }
       public int RetornaIdContrato()

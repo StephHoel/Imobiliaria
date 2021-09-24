@@ -9,14 +9,14 @@ namespace Imobiliaria.Classes
         private bool Recado { get; set; }
         private bool Excluido { get; set; }
 
-        public Telefone(long cpf, int cod, int numero, bool whatsapp, bool recado)
+        public Telefone(long cpf, int cod, int numero, bool whatsapp, bool recado, bool excluido = false)
         {
             this.Cpf = cpf;
             this.Cod = cod;
             this.Numero = numero;
             this.Whatsapp = whatsapp;
             this.Recado = recado;
-            this.Excluido = false;
+            this.Excluido = excluido;
         }
 
         public long RetornaCpf()
