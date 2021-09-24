@@ -13,9 +13,10 @@ namespace Imobiliaria.Classes
         private string Naturalidade { get; set; }
         private string Pai { get; set; }
         private string Mae { get; set; }
+        private string Email { get; set; }
         private bool Excluido { get; set; }
 
-        public Pessoa(long cpf, string nome, long rg, string orgaouf, DateTime datanasc, string nacionalidade, string naturalidade, string pai, string mae)
+        public Pessoa(long cpf, string nome, long rg, string orgaouf, DateTime datanasc, string nacionalidade, string naturalidade, string pai, string mae, string email)
         {
             this.Cpf = cpf;
             this.Nome = nome;
@@ -26,6 +27,7 @@ namespace Imobiliaria.Classes
             this.Naturalidade = naturalidade;
             this.Pai = pai;
             this.Mae = mae;
+            this.Email = email;
             this.Excluido = false;
 
         }

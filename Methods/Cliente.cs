@@ -42,8 +42,9 @@ namespace Imobiliaria
             string nacionalidade = "";
             string pai = "";
             string mae = "";
+            string email = "";
 
-            Pessoa cliente = new(cpf, nome, rg, orgaouf, dataNasc, naturalidade, nacionalidade, pai, mae);
+            Pessoa cliente = new(cpf, nome, rg, orgaouf, dataNasc, naturalidade, nacionalidade, pai, mae, email);
 
 
 
