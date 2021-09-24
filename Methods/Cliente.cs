@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.Serialization;
 using Imobiliaria.Classes;
 
 namespace Imobiliaria
@@ -30,25 +31,33 @@ namespace Imobiliaria
             */
 
 
-            var cpf = Input.Cpf();
-            var nome = Input.PedeString("Nome Completo (sem abreviação): ");
-            var rg = Input.Rg();
-            var orgao = Input.PedeString("Órgão Expedidor: ");
+            long cpf = Input.Cpf();
+            string nome = Input.PedeString("Nome Completo (sem abreviação): ");
+            long rg = Input.Rg();
+            string orgaouf = Input.OrgaoUF("Órgão Expedidor/UF: ");
 
-            var uf = "";
-            var dataNasc = "";
-            var naturalidade = "";
-            var nacionalidade = "";
-            var pai = "";
-            var mae = "";
-            //
 
-            Pessoa cliente = new(cpf, rg, nome, orgao, uf, dataNasc, naturalidade, nacionalidade, pai, mae);
+            DateTime dataNasc = new(); // DateTime
+            string naturalidade = "";
+            string nacionalidade = "";
+            string pai = "";
+            string mae = "";
 
-            
+            Pessoa cliente = new(cpf, nome, rg, orgaouf, dataNasc, naturalidade, nacionalidade, pai, mae);
+
+
+
+            //Endereco(long cpf, int cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais)
+
+            //Telefone(long cpf, int cod, int numero, bool whatsapp, bool recado)
+
+            //Imovel(long cpfProprietario, int cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais)
+
+            //Contrato(long cpfLocatario, int idImovel, DateTime dataInicio, DateTime dataFim, double valorInicial, int vencimento)
+
 
             // string obj = $"{Arquivo.ProximoId()}|{titulo}|{(Genero)genero}|{ano}|{desc}|false";
             // Arquivo.Escrever(obj);
-        }
+      }
     }
 }
