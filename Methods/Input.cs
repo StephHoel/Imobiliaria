@@ -140,5 +140,50 @@ namespace Imobiliaria
 
             return email;
       }
+
+        protected internal static string EstadoCivil()
+        {
+            Console.WriteLine("Estado Civil:");
+
+            foreach (int i in Enum.GetValues(typeof(EstadoCivil)))
+            {
+                Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(EstadoCivil), i));
+            }
+
+            bool input = true;
+            int output = 0;
+
+            do
+            {
+                Console.WriteLine();
+                Console.Write("Digite o número da opção: ");
+                input = int.TryParse(Console.ReadLine(), out output);
+            } while (!input);
+
+            return Enum.GetName(typeof(EstadoCivil), output);
+        }
+
+        protected internal static string FichaRapida()
+        {
+            Console.WriteLine("Ficha Rapida:");
+
+            foreach (int i in Enum.GetValues(typeof(FichaRapida)))
+            {
+                Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(FichaRapida), i));
+            }
+
+            bool input = true;
+            int output = 0;
+
+            do
+            {
+                Console.WriteLine();
+                Console.Write("Digite o número da opção: ");
+                input = int.TryParse(Console.ReadLine(), out output);
+            } while (!input);
+
+            return Enum.GetName(typeof(FichaRapida), output);
+        }
+
     }
 }

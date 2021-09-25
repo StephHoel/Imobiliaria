@@ -13,12 +13,12 @@ namespace Imobiliaria.Classes
         private string Naturalidade { get; set; }
         private string Pai { get; set; }
         private string Mae { get; set; }
-        private EstadoCivil EstadoCivil { get; set; }
-        private FichaRapida FichaRapida { get; set; }
+        private string EstadoCivil { get; set; }
+        private string FichaRapida { get; set; }
         private string Email { get; set; }
         private bool Excluido { get; set; }
 
-        public Pessoa(long cpf, string nome, long rg, string orgaouf, string datanasc, string nacionalidade, string naturalidade, string pai, string mae, EstadoCivil estadoCivil, FichaRapida fichaRapida, string email, bool excluido = false)
+        public Pessoa(long cpf, string nome, long rg, string orgaouf, string datanasc, string nacionalidade, string naturalidade, string pai, string mae, string estadoCivil, string fichaRapida, string email, bool excluido = false)
         {
             this.Cpf = cpf;
             this.Nome = nome;
@@ -72,11 +72,11 @@ namespace Imobiliaria.Classes
         {
             return this.Mae;
         }
-        public EstadoCivil RetornaEstadoCivil()
+        public string RetornaEstadoCivil()
         {
             return this.EstadoCivil;
         }
-        public FichaRapida RetornaFichaRapida()
+        public string RetornaFichaRapida()
         {
             return this.FichaRapida;
         }
