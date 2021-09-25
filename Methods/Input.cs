@@ -1,23 +1,29 @@
 using System;
+using System.Globalization;
+using System.Threading;
 
 namespace Imobiliaria
 {
     public class Input
     {
-        // protected internal static int Genero()
-        // {
-        //     Console.WriteLine(); // para ganhar um espaço entre a entrada anterior e essa
+        static bool resultado = true;
 
-        //     // https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getvalues?view=netcore-3.1
-        //     // https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getname?view=netcore-3.1
-        //     foreach (int i in Enum.GetValues(typeof(Genero)))
-        //     {
-        //         Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(Genero), i));
-        //     }
+        /* Exemplos do Código Antigo
 
-        //     Console.Write(Environment.NewLine + "Digite o número do novo gênero: ");
-        //     return int.Parse(Console.ReadLine());
-        // }
+        protected internal static int Genero()
+        {
+            Console.WriteLine(); // para ganhar um espaço entre a entrada anterior e essa
+
+            // https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getvalues?view=netcore-3.1
+            // https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getname?view=netcore-3.1
+            foreach (int i in Enum.GetValues(typeof(Genero)))
+            {
+                Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(Genero), i));
+            }
+
+            Console.Write(Environment.NewLine + "Digite o número do novo gênero: ");
+            return int.Parse(Console.ReadLine());
+        }
 
         protected internal static string Titulo()
         {
@@ -31,21 +37,13 @@ namespace Imobiliaria
             return int.Parse(Console.ReadLine());
         }
 
-      protected internal static string Descricao()
-      {
-         Console.Write("Informe a nova descrição: ");
-         return Console.ReadLine();
-      }
+        Fim dos Exemplos
+        */
 
-      protected internal static int Id()
-        {
-        	Console.Write("Digite o id da série: ");
-			return int.Parse(Console.ReadLine());
-        }
+        // Novo Sistema
 
-        protected internal static long Cpf() // funcionando
+        protected internal static long Cpf()
         {
-            bool resultado = true;
             long cpf;
             do
             {
@@ -59,9 +57,8 @@ namespace Imobiliaria
             return cpf;
         }
 
-        protected internal static long Rg() // funcionando
+        protected internal static long Rg()
         {
-            bool resultado = true;
             long rg;
             do
             {
@@ -101,5 +98,26 @@ namespace Imobiliaria
             return orgaouf;
          }
 
+        protected internal static string DataNasc()
+        {
+            DateTime data;
+            string linha;
+
+            do
+            {
+                Console.Write("Digite a data de nascimento (dd/mm/aaaa): ");
+                linha = Console.ReadLine();
+
+                resultado = DateTime.TryParse(linha, new CultureInfo("pt-BR"), DateTimeStyles.None, out data);
+
+                if (!resultado)
+                {
+                    Console.WriteLine("**Use o formato correto (dd/mm/aaaa)**");
+                }
+
+            } while (!resultado);
+
+            return data.ToString("dd/MM/yyyy");
+        }
     }
 }

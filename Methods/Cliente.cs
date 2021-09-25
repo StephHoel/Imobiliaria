@@ -35,10 +35,10 @@ namespace Imobiliaria
             string nome = Input.PedeString("Nome Completo (sem abreviação): ");
             long rg = Input.Rg();
             string orgaouf = Input.OrgaoUF("Órgão Expedidor/UF: ");
+            string dataNasc = Input.DataNasc();
 
-
-            DateTime dataNasc = new();
             string naturalidade = "";
+
             string nacionalidade = "";
             string pai = "";
             string mae = "";

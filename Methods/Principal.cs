@@ -10,19 +10,22 @@ namespace Imobiliaria
 		{
 			Console.WriteLine("**Inserir Nova Série**");
 
+			/*
 			var titulo = Input.Titulo();
-			// var genero = Input.Genero();
+			var genero = Input.Genero();
 			var ano    = Input.Ano();
 			var desc   = Input.Descricao();
 
-			// string obj = $"{Arquivo.ProximoId()}|{titulo}|{(Genero)genero}|{ano}|{desc}|false";
-			// Arquivo.Escrever(obj);
+			string obj = $"{Arquivo.ProximoId()}|{titulo}|{(Genero)genero}|{ano}|{desc}|false";
+			Arquivo.Escrever(obj);
+			*/
 		}
 
 		protected internal static void AtualizarSerie()
 		{
 			Console.WriteLine(Environment.NewLine + "**Atualizar Série**");
 
+			/*
 			int idSerie = Input.Id(); // informa qual serie será sendo editada
 			Console.WriteLine();
 
@@ -48,10 +51,12 @@ namespace Imobiliaria
 
 				Arquivo.Alterar(readText);
 			}
+			*/
 		}
 
       protected internal static void ExcluirSerie()
 		{
+			/*
 			int idSerie = Input.Id();
 
 			string[] readText = File.ReadAllLines(Arquivo.path);
@@ -65,12 +70,14 @@ namespace Imobiliaria
 
 				Arquivo.Alterar(readText);
 			}
+			*/
 		}
 
       protected internal static void VisualizarSerie()
 		{
 			Console.WriteLine($"{Environment.NewLine}**Visualizar Série**");
 
+			/*
 			int idSerie = Input.Id();
 
 			string[] readText = File.ReadAllLines(Arquivo.path);
@@ -85,6 +92,7 @@ namespace Imobiliaria
 				Console.WriteLine($"Excluída? {(bool.Parse(linha[5]) ? "Sim" : "Não")}");
 				Console.WriteLine();
 			}
+			*/
 		}
     }
 }

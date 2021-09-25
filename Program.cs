@@ -6,15 +6,22 @@ namespace Imobiliaria
    {
 		static void Main()
 		{
-			/* TODO
+         /* TODO
 				Menu com:
 					[x]Novo Cliente
 					[]Listar Cliente (baseado em algum critério)
-					[]Editar Cliente (desativar, nunca excluir)
+					[]Editar Cliente
+					[]Excluir Cliente (desativar, nunca excluir)
+
+					[]Novo Imóvel
+					[]Listar Imóvel
+					[]Editar Imóvel
+					[]Excluir Imóvel (desativar, nunca excluir)
 
 					[]Novo Contrato
 					[]Listar Contrato
 					[]Editar Contrato
+					[]Excluir Contrato (desativar, nunca excluir)
 			*/
 
          Console.Clear();
