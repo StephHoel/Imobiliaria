@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Net.Mail;
 using System.Threading;
 
 namespace Imobiliaria
@@ -51,7 +52,7 @@ namespace Imobiliaria
                 string cpfInput = Console.ReadLine();
                 cpfInput = cpfInput.Length > 11 ? cpfInput.Substring(0, 11) : cpfInput;
                 resultado = Int64.TryParse(cpfInput, out cpf);
-                if(resultado == false) Console.WriteLine("Digite apenas números por favor");
+                if(resultado == false) Console.WriteLine("**Digite apenas números**");
             } while (resultado == false);
 
             return cpf;
@@ -66,7 +67,7 @@ namespace Imobiliaria
                 string rgInput = Console.ReadLine();
                 rgInput = rgInput.Length > 9 ? rgInput.Substring(0, 9) : rgInput;
                 resultado = Int64.TryParse(rgInput, out rg);
-                if(resultado == false) Console.WriteLine("Digite apenas números");
+                if(resultado == false) Console.WriteLine("**Digite apenas números**");
             } while (resultado == false);
 
             return rg;
@@ -91,7 +92,7 @@ namespace Imobiliaria
                 output = orgaouf.Split('/');
 
                 if (output.Length != 2)
-                    Console.WriteLine("Digite o Órgão Expedidor e o UF com uma barra (/) entre as duas informações");
+                    Console.WriteLine("**Use uma barra (/) entre o Órgão Expedidor e o UF**");
 
             } while (output.Length != 2);
 
@@ -119,5 +120,25 @@ namespace Imobiliaria
 
             return data.ToString("dd/MM/yyyy");
         }
+
+        protected internal static string Email()
+        {
+            string email;
+
+            do
+            {
+                Console.Write("Email (exemplo@exemplo.com): ");
+                email = Console.ReadLine();
+
+                var addr = new MailAddress(email);
+                resultado = addr.Address.Equals(email);
+
+                if(!resultado)
+                    Console.WriteLine("**Digite corretamente o email**");
+
+            } while (!resultado);
+
+            return email;
+      }
     }
 }

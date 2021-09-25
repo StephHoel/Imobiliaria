@@ -1,10 +1,8 @@
-using System;
-using System.Runtime.Serialization;
 using Imobiliaria.Classes;
 
 namespace Imobiliaria
 {
-    public class Cliente
+   public class Cliente
     {
         protected internal static void NovoCliente()
 		{
@@ -36,15 +34,15 @@ namespace Imobiliaria
             long rg = Input.Rg();
             string orgaouf = Input.OrgaoUF("Órgão Expedidor/UF: ");
             string dataNasc = Input.DataNasc();
+            string naturalidade = Input.PedeString("Naturalidade: ");
+            string nacionalidade = Input.PedeString("Nacionalidade: ");
+            string pai = Input.PedeString("Nome do Pai: ");
+            string mae = Input.PedeString("Nome da Mãe: ");
 
-            string naturalidade = "";
 
-            string nacionalidade = "";
-            string pai = "";
-            string mae = "";
             EstadoCivil estadoCivil = new();
             FichaRapida fichaRapida = new();
-            string email = "";
+            string email = Input.Email();
 
             Pessoa cliente = new(cpf, nome, rg, orgaouf, dataNasc, naturalidade, nacionalidade, pai, mae, estadoCivil, fichaRapida, email);
 
