@@ -8,7 +8,7 @@ namespace Imobiliaria.Classes
       private long CpfProprietario { get; set; }
       private Situacao Situacao { get; set; }
 
-      public Imovel(long cpfProprietario, Situacao situacao, int cep, string logradouro, int? numero, string complemento, string bairro, string cidade, string estado, string pais, bool excluido = false)
+      public Imovel(long cpfProprietario, Situacao situacao, int cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais, bool excluido = false)
       {
          this.IdImovel = ProximoId();
          this.CpfProprietario = cpfProprietario;

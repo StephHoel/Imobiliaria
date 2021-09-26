@@ -31,6 +31,7 @@ namespace Imobiliaria
 
 
             long cpf = Input.Cpf();
+            Endereco.NovoEndereco(cpf);
             string nome = Input.PedeString("Nome Completo (sem abreviação): ");
             long rg = Input.Rg();
             string orgaouf = Input.OrgaoUF("Órgão Expedidor/UF: ");
@@ -43,21 +44,20 @@ namespace Imobiliaria
             string email = Input.Email();
             string fichaRapida = Input.FichaRapida();
 
+
             Pessoa cliente = new(cpf, nome, rg, orgaouf, dataNasc, naturalidade, nacionalidade, pai, mae, estadoCivil, fichaRapida, email);
 
 
 
-            //Endereco(long cpf, int cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais)
+         //Telefone(long cpf, int cod, int numero, bool whatsapp, bool recado)
 
-            //Telefone(long cpf, int cod, int numero, bool whatsapp, bool recado)
+         //Imovel(long cpfProprietario, int cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais)
 
-            //Imovel(long cpfProprietario, int cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais)
-
-            //Contrato(long cpfLocatario, int idImovel, DateTime dataInicio, DateTime dataFim, double valorInicial, int vencimento)
+         //Contrato(long cpfLocatario, int idImovel, DateTime dataInicio, DateTime dataFim, double valorInicial, int vencimento)
 
 
-            // string obj = $"{Arquivo.ProximoId()}|{titulo}|{(Genero)genero}|{ano}|{desc}|false";
-            // Arquivo.Escrever(obj);
+         // string obj = $"{Arquivo.ProximoId()}|{titulo}|{(Genero)genero}|{ano}|{desc}|false";
+         // Arquivo.Escrever(obj);
       }
     }
 }

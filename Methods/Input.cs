@@ -185,5 +185,65 @@ namespace Imobiliaria
             return Enum.GetName(typeof(FichaRapida), output);
         }
 
-    }
+        protected internal static int Cep()
+        {
+            int cep;
+            do
+            {
+                Console.Write("CEP (apenas números): ");
+                string cepInput = Console.ReadLine();
+                cepInput = cepInput.Length > 8 ? cepInput.Substring(0, 8) : cepInput;
+
+                resultado = Int32.TryParse(cepInput, out cep);
+
+                if (cepInput.Length < 8) resultado = false;
+                if (resultado == false) Console.WriteLine("**Digite apenas 8 dígitos**");
+            } while (resultado == false);
+
+            return cep;
+        }
+        protected internal static int Numero()
+        {
+            int numero;
+            do
+            {
+                Console.Write("Número (digite 0 para S/N): ");
+                string numeroInput = Console.ReadLine();
+
+                resultado = Int32.TryParse(numeroInput, out numero);
+
+                if (resultado == false) Console.WriteLine("**Digite apenas números**");
+            } while (resultado == false);
+
+            return numero;
+        }
+
+        protected internal static string EstadoUF()
+        {
+            Console.WriteLine("Estado (UF)");
+
+            foreach (int i in Enum.GetValues(typeof(EstadosUF)))
+            {
+                Console.WriteLine(Enum.GetName(typeof(EstadosUF), i));
+            }
+
+            bool input = true;
+            string uf;
+
+            do
+            {
+                Console.WriteLine();
+                Console.Write("Digite apenas a sigla do Estado: ");
+                uf = Console.ReadLine();
+                uf = uf.Length > 2 ? uf.Substring(0, 2) : uf;
+
+                input = uf.Length < 2 ? false : true;
+
+            } while (!input);
+
+            return uf;
+        }
+
+
+   }
 }
