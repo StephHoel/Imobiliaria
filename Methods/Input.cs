@@ -202,6 +202,7 @@ namespace Imobiliaria
 
             return cep;
         }
+
         protected internal static int Numero()
         {
             int numero;
@@ -248,6 +249,28 @@ namespace Imobiliaria
             } while (!input);
 
             return uf;
+        }
+
+        protected internal static string Situacao()
+        {
+            Console.WriteLine("O imóvel está destinado à: ");
+
+            foreach (int i in Enum.GetValues(typeof(Situacao)))
+            {
+                Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(Situacao), i));
+            }
+
+            bool input = false;
+            int output = 0;
+
+            do
+            {
+                Console.WriteLine();
+                Console.Write("Digite o número da opção: ");
+                input = int.TryParse(Console.ReadLine(), out output);
+            } while (!input);
+
+            return Enum.GetName(typeof(Situacao), output);
         }
 
 
