@@ -4,86 +4,86 @@ namespace Imobiliaria
     {
         // UF das 27 Unidades Federativas do Brasil
 
-        AC = 1,
+        AC,
         //Acre
 
-        AL = 2,
+        AL,
         //Alagoas
 
-        AP = 3,
+        AP,
         //Amapá
 
-        AM = 4,
+        AM,
         //Amazonas
 
-        BA = 5,
+        BA,
         //Bahia
 
-        CE = 6,
+        CE,
         //Ceará
 
-        ES = 7,
+        DF,
+        //Distrito Federal
+
+        ES,
         //Espírito Santo
 
-        GO = 8,
+        GO,
         //Goiás
 
-        MA = 9,
+        MA,
         //Maranhão
 
-        MT = 10,
+        MT,
         //Mato Grosso
 
-        MS = 11,
+        MS,
         //Mato Grosso do Sul
 
-        MG = 12,
+        MG,
         //Minas Gerais
 
-        PA = 13,
+        PA,
         //Pará
 
-        PB = 14,
+        PB,
         //Paraíba
 
-        PR = 15,
+        PR,
         //Paraná
 
-        PE = 16,
+        PE,
         //Pernambuco
 
-        PI = 17,
+        PI,
         //Piauí
 
-        RJ = 18,
+        RJ,
         //Rio de Janeiro
 
-        RN = 19,
+        RN,
         //Rio Grande do Norte
 
-        RS = 20,
+        RS,
         //Rio Grande do Sul
 
-        RO = 21,
+        RO,
         //Rondônia
 
-        RR = 22,
+        RR,
         //Roraima
 
-        SC = 23,
+        SC,
         //Santa Catarina
 
-        SP = 24,
+        SP,
         //São Paulo
 
-        SE = 25,
+        SE,
         //Sergipe
 
-        TO = 26,
+        TO
         //Tocantins
-
-        DF = 27
-        //Distrito Federal
 
     }
 }

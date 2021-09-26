@@ -227,17 +227,23 @@ namespace Imobiliaria
                 Console.WriteLine(Enum.GetName(typeof(EstadosUF), i));
             }
 
-            bool input = true;
+            bool input = false;
             string uf;
 
             do
             {
-                Console.WriteLine();
                 Console.Write("Digite apenas a sigla do Estado: ");
                 uf = Console.ReadLine();
                 uf = uf.Length > 2 ? uf.Substring(0, 2) : uf;
 
-                input = uf.Length < 2 ? false : true;
+                foreach (int i in Enum.GetValues(typeof(EstadosUF)))
+                {
+                    if (uf.ToUpper() == Enum.GetName(typeof(EstadosUF), i))
+                    {
+                        input = true;
+                        break;
+                    }
+                }
 
             } while (!input);
 
