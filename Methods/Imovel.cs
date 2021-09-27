@@ -1,8 +1,6 @@
-using System.ComponentModel.Design;
-
-namespace Imobiliaria
+namespace Imobiliaria 
 {
-    public class Imovel
+   public class Imovel
     {
         protected internal static void NovoImovel(long cpfProprietario)
         {
@@ -16,7 +14,7 @@ namespace Imobiliaria
             string estado = Input.EstadoUF();
             string pais = Input.PedeString("País: ");
 
-            Classes.Imovel imovel = new(cpfProprietario, situacao, cep, logradouro, numero, complemento, bairro, cidade, estado, pais); 
-      }
+            Classes.Imovel imovel = new(cpfProprietario, situacao, cep, logradouro, numero, complemento, bairro, cidade, estado, pais);
+        }
     }
 }
