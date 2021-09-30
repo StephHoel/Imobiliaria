@@ -50,10 +50,10 @@ namespace Imobiliaria
             string fichaRapida = FichaRapida();
 
             //Telefone(s) do Cliente
-            Telefone.NovoTelefone(cpf);
+            Telefones.NovoTelefone(cpf);
 
             //Endereço
-            Endereco.NovoEndereco(cpf);
+            Enderecos.NovoEndereco(cpf);
 
             Pessoa cliente = new(cpf, nome, rg, orgaouf, dataNasc, naturalidade, nacionalidade, pai, mae, estadoCivil, fichaRapida, email);
 
