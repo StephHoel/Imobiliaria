@@ -2,14 +2,14 @@ namespace Imobiliaria.Classes
 {
     public class Telefone
     {
-        private long Cpf { get; set; }
+        private string Cpf { get; set; }
         private int Cod { get; set; }
         private int Numero { get; set; }
         private bool Whatsapp { get; set; }
         private bool Recado { get; set; }
         private bool Excluido { get; set; }
 
-        public Telefone(long cpf, int cod, int numero, bool whatsapp, bool recado, bool excluido = false)
+        public Telefone(string cpf, int cod, int numero, bool whatsapp, bool recado, bool excluido = false)
         {
             this.Cpf = cpf;
             this.Cod = cod;
@@ -19,7 +19,7 @@ namespace Imobiliaria.Classes
             this.Excluido = excluido;
         }
 
-        public long RetornaCpf()
+        public string RetornaCpf()
         {
             return this.Cpf;
         }

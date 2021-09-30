@@ -4,9 +4,9 @@ namespace Imobiliaria.Classes
 {
     public class Pessoa
     {
-        private long Cpf { get; set; }
+        private string Cpf { get; set; }
         private string Nome { get; set; }
-        private long Rg { get; set; }
+        private string Rg { get; set; }
         private string OrgaoUF { get; set; }
         private string DataNasc { get; set; }
         private string Nacionalidade { get; set; }
@@ -18,7 +18,7 @@ namespace Imobiliaria.Classes
         private string Email { get; set; }
         private bool Excluido { get; set; }
 
-        public Pessoa(long cpf, string nome, long rg, string orgaouf, string datanasc, string nacionalidade, string naturalidade, string pai, string mae, string estadoCivil, string fichaRapida, string email, bool excluido = false)
+        public Pessoa(string cpf, string nome, string rg, string orgaouf, string datanasc, string nacionalidade, string naturalidade, string pai, string mae, string estadoCivil, string fichaRapida, string email, bool excluido = false)
         {
             this.Cpf = cpf;
             this.Nome = nome;
@@ -36,7 +36,7 @@ namespace Imobiliaria.Classes
 
         }
 
-        public long RetornaCpf()
+        public string RetornaCpf()
         {
             return this.Cpf;
         }
@@ -44,7 +44,7 @@ namespace Imobiliaria.Classes
         {
             return this.Nome;
         }
-        public long RetornaRg()
+        public string RetornaRg()
         {
             return this.Rg;
         }

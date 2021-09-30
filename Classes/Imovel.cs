@@ -5,10 +5,10 @@ namespace Imobiliaria.Classes
     public class Imovel : EnderecoBase
     {
       private int IdImovel { get; set; }
-      private long CpfProprietario { get; set; }
+      private string CpfProprietario { get; set; }
       private string Situacao { get; set; }
 
-      public Imovel(long cpfProprietario, string situacao, int cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais, bool excluido = false)
+      public Imovel(string cpfProprietario, string situacao, int cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais, bool excluido = false)
       {
          this.IdImovel = ProximoId();
          this.CpfProprietario = cpfProprietario;
@@ -24,11 +24,11 @@ namespace Imobiliaria.Classes
          this.Excluido = excluido;
       }
 
-      public long RetornaIdImovel()
+      public int RetornaIdImovel()
       {
          return this.IdImovel;
       }
-      public long RetornaCpfProprietario()
+      public string RetornaCpfProprietario()
       {
          return this.CpfProprietario;
       }

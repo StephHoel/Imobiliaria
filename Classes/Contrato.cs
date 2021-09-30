@@ -5,18 +5,18 @@ namespace Imobiliaria.Classes
     public class Contrato
     {
       private int IdContrato { get; set; }
-      private long CpfLocatario { get; set; }
+      private string CpfLocatario { get; set; }
       private int IdImovel { get; set; }
-      private DateTime DataInicio { get; set; }
-      private DateTime DataFim { get; set; }
+      private string DataInicio { get; set; }
+      private string DataFim { get; set; }
       private double ValorInicial { get; set; }
       private int Vencimento { get; set; }
-      private DateTime? DataQuebra { get; set; }
-      private DateTime? DataRenovacao { get; set; }
+      private string DataQuebra { get; set; }
+      private string DataRenovacao { get; set; }
       private bool Finalizado { get; set; }
       private bool Excluido { get; set; }
 
-      public Contrato(long cpfLocatario, int idImovel, DateTime dataInicio, DateTime dataFim, double valorInicial, int vencimento, bool finalizado = false, bool excluido = false)
+      public Contrato(string cpfLocatario, int idImovel, string dataInicio, string dataFim, double valorInicial, int vencimento, bool finalizado = false, bool excluido = false)
       {
          this.CpfLocatario = cpfLocatario;
          this.IdImovel = idImovel;
@@ -32,7 +32,7 @@ namespace Imobiliaria.Classes
       {
          return this.IdContrato;
       }
-      public long RetornaCpfLocatario()
+      public string RetornaCpfLocatario()
       {
          return this.CpfLocatario;
       }
@@ -40,11 +40,11 @@ namespace Imobiliaria.Classes
       {
          return this.IdImovel;
       }
-      public DateTime RetornaDataInicio()
+      public string RetornaDataInicio()
       {
          return this.DataInicio;
       }
-      public DateTime RetornaDataFim()
+      public string RetornaDataFim()
       {
          return this.DataFim;
       }
@@ -56,11 +56,11 @@ namespace Imobiliaria.Classes
       {
          return this.Vencimento;
       }
-      public DateTime? RetornaDataQuebra()
+      public string RetornaDataQuebra()
       {
          return this.DataQuebra;
       }
-      public DateTime? RetornaDataRenovacao()
+      public string RetornaDataRenovacao()
       {
          return this.DataRenovacao;
       }
