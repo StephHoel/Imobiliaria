@@ -21,7 +21,7 @@ namespace Imobiliaria
             {
                string[] l = Output.Split(line);
 
-               Contrato contrato1 = new(long.Parse(l[0]), int.Parse(l[1]), DateTime.Parse(l[2]), DateTime.Parse(l[3]), double.Parse(l[4]), int.Parse(l[5]), bool.Parse(l[6]), bool.Parse(l[7]));
+               Contrato contrato1 = new(Encriptografia.Decrypt(l[0]), int.Parse(l[1]), l[2], l[3], double.Parse(l[4]), int.Parse(l[5]), bool.Parse(l[6]), bool.Parse(l[7]));
                contrato.Add(contrato1);
             }
          }
@@ -34,7 +34,7 @@ namespace Imobiliaria
             {
                string[] l = Output.Split(line);
 
-               Endereco endereco1 = new(long.Parse(l[0]), int.Parse(l[1]), l[2], int.Parse(l[3]), l[4], l[5], l[6], l[7], l[8], bool.Parse(l[9]));
+               Endereco endereco1 = new(Encriptografia.Decrypt(l[0]), int.Parse(l[1]), l[2], int.Parse(l[3]), l[4], l[5], l[6], l[7], l[8], bool.Parse(l[9]));
                endereco.Add(endereco1);
             }
          }
@@ -47,7 +47,7 @@ namespace Imobiliaria
             {
                string[] l = Output.Split(line);
 
-               Imovel imovel1 = new(long.Parse(l[0]), l[1], int.Parse(l[2]), l[3], int.Parse(l[4]), l[5], l[6], l[7], l[8], l[9], bool.Parse(l[10]));
+               Imovel imovel1 = new(Encriptografia.Decrypt(l[0]), l[1], int.Parse(l[2]), l[3], int.Parse(l[4]), l[5], l[6], l[7], l[8], l[9], bool.Parse(l[10]));
                imovel.Add(imovel1);
             }
          }
@@ -60,7 +60,7 @@ namespace Imobiliaria
             {
                string[] l = Output.Split(line);
 
-               Pessoa cliente = new(long.Parse(l[0]), l[1], long.Parse(l[2]), l[3], l[4], l[6], l[7], l[8], l[9], l[10], l[11], l[12]);
+               Pessoa cliente = new(Encriptografia.Decrypt(l[0]), l[1], Encriptografia.Decrypt(l[2]), l[3], l[4], l[6], l[7], l[8], l[9], l[10], l[11], l[12]);
                pessoa.Add(cliente);
             }
          }
@@ -73,7 +73,7 @@ namespace Imobiliaria
             {
                string[] l = Output.Split(line);
 
-               Telefone tel = new(long.Parse(l[0]), int.Parse(l[1]), int.Parse(l[2]), bool.Parse(l[3]), bool.Parse(l[4]), bool.Parse(l[5]));
+               Telefone tel = new(Encriptografia.Decrypt(l[0]), int.Parse(l[1]), int.Parse(l[2]), bool.Parse(l[3]), bool.Parse(l[4]), bool.Parse(l[5]));
                telefone.Add(tel);
             }
          }
