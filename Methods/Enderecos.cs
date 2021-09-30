@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using Imobiliaria.Classes;
 
 namespace Imobiliaria
 {
     public class Enderecos
-    {
+   {
+      readonly private static List<Endereco> enderecos = new();
       protected internal static void NovoEndereco(long cpf)
       {
         int cep = Input.Cep(); // somente números - 8 dígitos
@@ -16,6 +18,8 @@ namespace Imobiliaria
         string pais = Input.PedeString("País: ");
 
         Endereco endereco = new(cpf, cep, logradouro, numero, complemento, bairro, cidade, estado, pais);
+
+        enderecos.Add(endereco);
       }
 
 

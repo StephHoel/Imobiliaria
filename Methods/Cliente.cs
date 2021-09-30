@@ -9,7 +9,7 @@ namespace Imobiliaria
    public class Cliente
    {
         private static bool resultado = true;
-        private static List<Pessoa> pessoa = new();
+        readonly private static List<Pessoa> pessoa = new();
 
         protected internal static void NovoCliente()
 		{

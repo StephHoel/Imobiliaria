@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using Imobiliaria.Classes;
 
 namespace Imobiliaria
 {
    public class Telefones
    {
+      readonly private static List<Telefone> telefones = new();
         static bool resultado = true;
         static bool novoNumero = false;
 
@@ -18,6 +20,8 @@ namespace Imobiliaria
                 bool recado = Recado();
 
                 Telefone telefone = new(cpf, cod, numero, whatsapp, recado);
+
+                telefones.Add(telefone);
 
                 novoNumero = NovoNumero();
             } while (!novoNumero);

@@ -1,7 +1,11 @@
+using System.Collections.Generic;
+using Imobiliaria.Classes;
+
 namespace Imobiliaria
 {
    public class Imoveis
-    {
+   {
+        readonly private static List<Imovel> imoveis = new();
         protected internal static void NovoImovel(long cpfProprietario)
         {
             string situacao = Input.Situacao();
@@ -14,7 +18,9 @@ namespace Imobiliaria
             string estado = Input.EstadoUF();
             string pais = Input.PedeString("País: ");
 
-            Classes.Imovel imovel = new(cpfProprietario, situacao, cep, logradouro, numero, complemento, bairro, cidade, estado, pais);
+            Imovel imovel = new(cpfProprietario, situacao, cep, logradouro, numero, complemento, bairro, cidade, estado, pais);
+
+            imoveis.Add(imovel);
         }
     }
 }

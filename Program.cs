@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Imobiliaria.Classes;
 using Imobiliaria.Interfaces;
+using Imobiliaria.Methods;
 
 namespace Imobiliaria
 {
@@ -120,11 +121,14 @@ namespace Imobiliaria
 						break;
 					case "2": // Listar Clientes
 						// Arquivo.ListarNaoExcluida();
+						Console.WriteLine();
+						Console.WriteLine("=====================");
 						Console.WriteLine("**Listando Clientes**");
 						foreach (var person in pessoa)
 						{
 							Console.WriteLine(person.RetornaNome());
 						}
+						Console.WriteLine("=====================");
 						break;
 					case "3": // Editar Cliente
 						Arquivo.ListarExcluida();
