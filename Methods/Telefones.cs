@@ -10,7 +10,7 @@ namespace Imobiliaria
         static bool resultado = true;
         static bool novoNumero = false;
 
-        protected internal static void NovoTelefone(long cpf)
+        protected internal static void NovoTelefone(string cpf)
         {
             do
             {

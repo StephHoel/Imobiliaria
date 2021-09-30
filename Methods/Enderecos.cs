@@ -6,7 +6,7 @@ namespace Imobiliaria
     public class Enderecos
    {
       readonly private static List<Endereco> enderecos = new();
-      protected internal static void NovoEndereco(long cpf)
+      protected internal static void NovoEndereco(string cpf)
       {
         int cep = Input.Cep(); // somente números - 8 dígitos
         string logradouro = Input.PedeString("Logradouro (sem número): ");

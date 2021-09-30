@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Mail;
 using Imobiliaria.Classes;
+using Imobiliaria.Methods;
 
 namespace Imobiliaria
 {
@@ -36,9 +37,9 @@ namespace Imobiliaria
             */
 
             //Informação Básica do Cliente
-            long cpf = Cpf();
+            string cpf = Encriptografia.Encrypt(Cpf());
             string nome = Input.PedeString("Nome Completo (sem abreviação): ");
-            long rg = Rg();
+            string rg = Encriptografia.Encrypt(Rg());
             string orgaouf = OrgaoUF();
             string dataNasc = DataNasc();
             string estadoCivil = EstadoCivil();
@@ -65,7 +66,7 @@ namespace Imobiliaria
 
         //
 
-        private static long Cpf()
+        private static string Cpf()
         {
             long cpf;
             do
@@ -77,10 +78,10 @@ namespace Imobiliaria
                 if (!resultado) Console.WriteLine("**Digite apenas números**");
             } while (!resultado);
 
-            return cpf;
-        }
+            return cpf.ToString();
+      }
 
-        private static long Rg()
+        private static string Rg()
         {
             long rg;
             do
@@ -92,7 +93,7 @@ namespace Imobiliaria
                 if (resultado == false) Console.WriteLine("**Digite apenas números**");
             } while (resultado == false);
 
-            return rg;
+            return rg.ToString();
         }
 
         private static string OrgaoUF()

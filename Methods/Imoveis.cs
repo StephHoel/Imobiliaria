@@ -6,7 +6,7 @@ namespace Imobiliaria
    public class Imoveis
    {
         readonly private static List<Imovel> imoveis = new();
-        protected internal static void NovoImovel(long cpfProprietario)
+        protected internal static void NovoImovel(string cpfProprietario)
         {
             string situacao = Input.Situacao();
             int cep = Input.Cep(); // somente números - 8 dígitos
