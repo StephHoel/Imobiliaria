@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Mail;
 using Imobiliaria.Classes;
@@ -7,7 +8,8 @@ namespace Imobiliaria
 {
    public class Cliente
    {
-        static bool resultado = true;
+        private static bool resultado = true;
+        private static List<Pessoa> pessoa = new();
 
         protected internal static void NovoCliente()
 		{
@@ -55,9 +57,13 @@ namespace Imobiliaria
 
             Pessoa cliente = new(cpf, nome, rg, orgaouf, dataNasc, naturalidade, nacionalidade, pai, mae, estadoCivil, fichaRapida, email);
 
+            pessoa.Add(cliente);
+
          // string obj = $"{Arquivo.ProximoId()}|{titulo}|{(Genero)genero}|{ano}|{desc}|false";
          // Arquivo.Escrever(obj);
         }
+
+        //
 
         private static long Cpf()
         {
@@ -192,8 +198,6 @@ namespace Imobiliaria
 
             return Enum.GetName(typeof(FichaRapida), output);
         }
-
-        //
 
    }
 }

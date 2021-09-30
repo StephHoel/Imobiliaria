@@ -1,6 +1,6 @@
-namespace Imobiliaria 
+namespace Imobiliaria
 {
-   public class Imovel
+   public class Imoveis
     {
         protected internal static void NovoImovel(long cpfProprietario)
         {

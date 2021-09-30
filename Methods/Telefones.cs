@@ -1,8 +1,9 @@
 using System;
+using Imobiliaria.Classes;
 
 namespace Imobiliaria
 {
-   public class Telefone
+   public class Telefones
    {
         static bool resultado = true;
         static bool novoNumero = false;
@@ -16,7 +17,7 @@ namespace Imobiliaria
                 bool whatsapp = Whatsapp();
                 bool recado = Recado();
 
-                Classes.Telefone telefone = new(cpf, cod, numero, whatsapp, recado);
+                Telefone telefone = new(cpf, cod, numero, whatsapp, recado);
 
                 novoNumero = NovoNumero();
             } while (!novoNumero);

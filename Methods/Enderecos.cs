@@ -1,6 +1,8 @@
+using Imobiliaria.Classes;
+
 namespace Imobiliaria
 {
-    public class Endereco
+    public class Enderecos
     {
       protected internal static void NovoEndereco(long cpf)
       {
@@ -13,7 +15,7 @@ namespace Imobiliaria
         string estado = Input.EstadoUF();
         string pais = Input.PedeString("País: ");
 
-        Classes.Endereco endereco = new(cpf, cep, logradouro, numero, complemento, bairro, cidade, estado, pais);
+        Endereco endereco = new(cpf, cep, logradouro, numero, complemento, bairro, cidade, estado, pais);
       }
 
 
