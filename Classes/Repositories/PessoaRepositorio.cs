@@ -1,14 +1,19 @@
+using System;
 using System.Collections.Generic;
+using System.IO;
+using Imobiliaria.DataBase;
 using Imobiliaria.Interfaces;
 
 namespace Imobiliaria.Classes
 {
     public class PessoaRepositorio : IRepositorio<Pessoa>
     {
+        readonly string path = "DataBase/pessoa.db";
         private readonly List<Pessoa> listaPessoa = new();
+
         public void Atualiza(int id, Pessoa objeto)
         {
-            listaPessoa[id] = objeto; 
+            listaPessoa[id] = objeto;
         }
 
         public void Exclui(int id)
@@ -16,25 +21,31 @@ namespace Imobiliaria.Classes
             listaPessoa[id].Excluir();
         }
 
-        public void Insere(Pessoa objeto)
+        public void Insere(Pessoa objeto1, string objeto2)
         {
-            listaPessoa.Add(objeto);
-        }
-
-        public static void Inserir(string objeto)
-        {
-            Arquivo.Escrever(objeto);
+            listaPessoa.Add(objeto1);
+            DB.Escrever(objeto2, path);
         }
 
         public List<Pessoa> Lista()
         {
+
             return listaPessoa;
         }
 
         public int ProximoId()
         {
-            return listaPessoa.Count;
-            // return Arquivo.ProximoId();
+            int proximoLista = listaPessoa.Count;
+            int proximoDB = DB.ProximoId(path);
+
+            if (proximoLista == proximoDB)
+            {
+                return proximoDB;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public Pessoa RetornaPorId(int id)

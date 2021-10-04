@@ -8,7 +8,7 @@ namespace Imobiliaria.Interfaces
 
          T RetornaPorId(int id);
 
-         void Insere (T entidade);
+         void Insere (T entidade, string entidade2);
 
          void Exclui(int id);
 

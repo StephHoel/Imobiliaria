@@ -5,8 +5,9 @@ namespace Imobiliaria
 {
    public class Arquivo
     {
-        protected internal const string path = "DataBase/sample.db";
+        // protected internal const string path = "DataBase/sample.db";
 
+/*
         protected internal static void ListarTudo()
         {
             try
@@ -89,8 +90,9 @@ namespace Imobiliaria
                 Erro(e.Message);
             }
         }
+        */
 
-        protected internal static void Escrever(string texto)
+        protected internal static void Escrever(string texto, string path)
         {
             try
             {
@@ -110,7 +112,7 @@ namespace Imobiliaria
                 Erro(e.Message);
             }
         }
-
+/*
         protected internal static void Alterar(string[] novoTexto)
         {
             try
@@ -135,6 +137,7 @@ namespace Imobiliaria
             string[] readText = File.ReadAllLines(path);
             return readText.Length;
         }
+        */
 
         protected static void Erro(string erro)
         {

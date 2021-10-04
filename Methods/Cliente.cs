@@ -10,11 +10,13 @@ namespace Imobiliaria
    public class Cliente
    {
         private static bool resultado = true;
-        readonly private static List<Pessoa> pessoa = new();
+        // readonly private static List<Pessoa> pessoa = new List<Pessoa>();
+
+        static readonly PessoaRepositorio repositorio = new();
 
         protected internal static void NovoCliente()
 		{
-			Output.Titulo("**Adicionando novo cliente**");
+			Output.Titulo("Adicionando novo cliente");
 
             /* O que precisa para o cliente?
                 -> CPF (encriptografado) [int] [primary key]
@@ -26,14 +28,13 @@ namespace Imobiliaria
                 -> Naturalidade [string]
                 -> Filiação Pai [string]
                 -> Filiação Mãe [string]
-                ->
-                -> Endereço (talvez em outra table)
-                -> Telefone (talvez em outra table)
-                -> Email (outra table?)
-                ->
                 -> EstadoCivil [Enum] [Solteiro, Casado, Viuvo, Divorciado, Separado, UniaoEstavel] (criado)
-                ->
                 -> FichaRapida [Enum] [NaoEnviada, EmAnálise, Aprovada, Reprovada] (criado)
+                -> Email
+                ->
+                -> Endereço (outra table)
+                -> Telefone (outra table)
+                ->
             */
 
             //Informação Básica do Cliente
@@ -58,10 +59,9 @@ namespace Imobiliaria
 
             Pessoa cliente = new(cpf, nome, rg, orgaouf, dataNasc, naturalidade, nacionalidade, pai, mae, estadoCivil, fichaRapida, email);
 
-            pessoa.Add(cliente);
+            string cliente2 = $"{cpf}|{nome}|{rg}|{orgaouf}|{dataNasc}|{naturalidade}|{nacionalidade}|{pai}|{mae}|{estadoCivil}|{fichaRapida}|{email}|{false}";
 
-         // string obj = $"{Arquivo.ProximoId()}|{titulo}|{(Genero)genero}|{ano}|{desc}|false";
-         // Arquivo.Escrever(obj);
+            repositorio.Insere(cliente, cliente2);
         }
 
         //

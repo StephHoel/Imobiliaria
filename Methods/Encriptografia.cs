@@ -7,13 +7,15 @@ namespace Imobiliaria.Methods
 {
     public class Encriptografia
     {
+
+        readonly private static string publickey = "12345678";
+        readonly private static string secretkey = "87654321";
+
         public static string Encrypt(string text)
         {
             try
             {
                 string ToReturn = "";
-                string publickey = "12345678";
-                string secretkey = "87654321";
                 byte[] secretkeyByte = Encoding.UTF8.GetBytes(secretkey);
                 byte[] publickeybyte = Encoding.UTF8.GetBytes(publickey);
                 MemoryStream ms = null;
@@ -40,8 +42,6 @@ namespace Imobiliaria.Methods
             try
             {
                 string ToReturn = "";
-                string publickey = "12345678";
-                string secretkey = "87654321";
                 byte[] privatekeyByte = Encoding.UTF8.GetBytes(secretkey);
                 byte[] publickeybyte = Encoding.UTF8.GetBytes(publickey);
                 MemoryStream ms = null;
@@ -50,18 +50,18 @@ namespace Imobiliaria.Methods
                 inputbyteArray = Convert.FromBase64String(text.Replace(" ", "+"));
                 using (DESCryptoServiceProvider des = new())
                 {
-                ms = new MemoryStream();
-                cs = new CryptoStream(ms, des.CreateDecryptor(publickeybyte, privatekeyByte), CryptoStreamMode.Write);
-                cs.Write(inputbyteArray, 0, inputbyteArray.Length);
-                cs.FlushFinalBlock();
-                Encoding encoding = Encoding.UTF8;
-                ToReturn = encoding.GetString(ms.ToArray());
+                    ms = new MemoryStream();
+                    cs = new CryptoStream(ms, des.CreateDecryptor(publickeybyte, privatekeyByte), CryptoStreamMode.Write);
+                    cs.Write(inputbyteArray, 0, inputbyteArray.Length);
+                    cs.FlushFinalBlock();
+                    Encoding encoding = Encoding.UTF8;
+                    ToReturn = encoding.GetString(ms.ToArray());
                 }
                 return ToReturn;
             }
-            catch (Exception ae)
+            catch (Exception ex)
             {
-                throw new Exception(ae.Message, ae.InnerException);
+                throw new Exception(ex.Message, ex.InnerException);
             }
         }
 

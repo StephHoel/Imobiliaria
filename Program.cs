@@ -12,8 +12,8 @@ namespace Imobiliaria
       static void Main()
       {
 
-         // Criar um void para criar as listas
-         List<Contrato> contrato = new();
+      // Criar um void para criar as listas
+      List<Contrato> contrato = new();
          string[] readContrato = File.ReadAllLines("DataBase/contrato.db");
          if (readContrato.Length != 0)
          {
@@ -60,7 +60,12 @@ namespace Imobiliaria
             {
                string[] l = Output.Split(line);
 
-               Pessoa cliente = new(Encriptografia.Decrypt(l[0]), l[1], Encriptografia.Decrypt(l[2]), l[3], l[4], l[6], l[7], l[8], l[9], l[10], l[11], l[12]);
+               // Console.WriteLine(l[0]);
+               // Console.WriteLine(Encriptografia.Decrypt(l[0]));
+               string cpf = Encriptografia.Decrypt(l[0]);
+               string rg = Encriptografia.Decrypt(l[2]);
+
+               Pessoa cliente = new(cpf, l[1], rg, l[3], l[4], l[6], l[7], l[8], l[9], l[10], l[11], l[12]);
                pessoa.Add(cliente);
             }
          }
@@ -124,14 +129,17 @@ namespace Imobiliaria
 						Console.WriteLine();
 						Console.WriteLine("=====================");
 						Console.WriteLine("**Listando Clientes**");
+						Console.WriteLine("=====================");
 						foreach (var person in pessoa)
 						{
-							Console.WriteLine(person.RetornaNome());
+                     Console.WriteLine("CPF: "  + person.RetornaCpf() +
+                                    " | RG: "   + person.RetornaRg() +
+												" | Nome: " + person.RetornaNome());
 						}
 						Console.WriteLine("=====================");
 						break;
 					case "3": // Editar Cliente
-						Arquivo.ListarExcluida();
+						// Arquivo.ListarExcluida();
 						break;
 					case "4": // Novo Contrato
 						Principal.InserirSerie();

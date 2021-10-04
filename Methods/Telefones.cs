@@ -14,6 +14,9 @@ namespace Imobiliaria
         {
             do
             {
+                Console.WriteLine();
+                Output.Titulo("Adicionando número de telefone");
+
                 int cod = Codigo();
                 int numero = Numero();
                 bool whatsapp = Whatsapp();
@@ -24,7 +27,7 @@ namespace Imobiliaria
                 telefones.Add(telefone);
 
                 novoNumero = NovoNumero();
-            } while (!novoNumero);
+            } while (novoNumero);
 
         }
 

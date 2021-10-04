@@ -23,7 +23,7 @@ namespace Imobiliaria.Classes
 
         public static void Inserir(string objeto)
         {
-            Arquivo.Escrever(objeto);
+            Arquivo.Escrever(objeto, "");
         }
 
         public List<Endereco> Lista()
@@ -41,5 +41,10 @@ namespace Imobiliaria.Classes
         {
             return listaEndereco[id];
         }
-    }
+
+      public void Insere(Endereco entidade, string entidade2)
+      {
+         throw new System.NotImplementedException();
+      }
+   }
 }
