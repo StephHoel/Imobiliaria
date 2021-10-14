@@ -12,8 +12,8 @@ namespace Imobiliaria
       static void Main()
       {
 
-      // Criar um void para criar as listas
-      List<Contrato> contrato = new();
+			// Criar um void para criar as listas
+			List<Contrato> contrato = new();
          string[] readContrato = File.ReadAllLines("DataBase/contrato.db");
          if (readContrato.Length != 0)
          {
@@ -21,7 +21,7 @@ namespace Imobiliaria
             {
                string[] l = Output.Split(line);
 
-               Contrato contrato1 = new(Encriptografia.Decrypt(l[0]), int.Parse(l[1]), l[2], l[3], double.Parse(l[4]), int.Parse(l[5]), bool.Parse(l[6]), bool.Parse(l[7]));
+               Contrato contrato1 = new(contrato.Count, Encriptografia.Decrypt(l[1]), int.Parse(l[2]), l[3], l[4], double.Parse(l[5]), int.Parse(l[6]), bool.Parse(l[7]), bool.Parse(l[8]));
                contrato.Add(contrato1);
             }
          }
@@ -34,7 +34,7 @@ namespace Imobiliaria
             {
                string[] l = Output.Split(line);
 
-               Endereco endereco1 = new(Encriptografia.Decrypt(l[0]), int.Parse(l[1]), l[2], int.Parse(l[3]), l[4], l[5], l[6], l[7], l[8], bool.Parse(l[9]));
+               Endereco endereco1 = new(endereco.Count, Encriptografia.Decrypt(l[1]), int.Parse(l[2]), l[3], int.Parse(l[4]), l[5], l[6], l[7], l[8], l[9], bool.Parse(l[10]));
                endereco.Add(endereco1);
             }
          }
@@ -47,7 +47,7 @@ namespace Imobiliaria
             {
                string[] l = Output.Split(line);
 
-               Imovel imovel1 = new(Encriptografia.Decrypt(l[0]), l[1], int.Parse(l[2]), l[3], int.Parse(l[4]), l[5], l[6], l[7], l[8], l[9], bool.Parse(l[10]));
+               Imovel imovel1 = new(imovel.Count, Encriptografia.Decrypt(l[1]), l[2], int.Parse(l[3]), l[4], int.Parse(l[5]), l[6], l[7], l[8], l[9], l[10], bool.Parse(l[11]));
                imovel.Add(imovel1);
             }
          }
@@ -62,10 +62,10 @@ namespace Imobiliaria
 
                // Console.WriteLine(l[0]);
                // Console.WriteLine(Encriptografia.Decrypt(l[0]));
-               string cpf = Encriptografia.Decrypt(l[0]);
-               string rg = Encriptografia.Decrypt(l[2]);
+               string cpf = Encriptografia.Decrypt(l[1]);
+               string rg = Encriptografia.Decrypt(l[3]);
 
-               Pessoa cliente = new(cpf, l[1], rg, l[3], l[4], l[6], l[7], l[8], l[9], l[10], l[11], l[12]);
+               Pessoa cliente = new(pessoa.Count, cpf, l[2], rg, l[4], l[5], l[6], l[7], l[8], l[9], l[10], l[11], l[12]);
                pessoa.Add(cliente);
             }
          }
@@ -78,7 +78,7 @@ namespace Imobiliaria
             {
                string[] l = Output.Split(line);
 
-               Telefone tel = new(Encriptografia.Decrypt(l[0]), int.Parse(l[1]), int.Parse(l[2]), bool.Parse(l[3]), bool.Parse(l[4]), bool.Parse(l[5]));
+               Telefone tel = new(telefone.Count, Encriptografia.Decrypt(l[1]), int.Parse(l[2]), int.Parse(l[3]), bool.Parse(l[4]), bool.Parse(l[5]), bool.Parse(l[6]));
                telefone.Add(tel);
             }
          }
@@ -122,25 +122,14 @@ namespace Imobiliaria
 				switch (opcao)
 				{
 					case "1": // Novo Cliente
-						Cliente.NovoCliente();
+						Cliente.NovoCliente(pessoa.Count);
 						break;
 					case "2": // Listar Clientes
-						// Arquivo.ListarNaoExcluida();
-						Console.WriteLine();
-						Console.WriteLine("=====================");
-						Console.WriteLine("**Listando Clientes**");
-						Console.WriteLine("=====================");
-						foreach (var person in pessoa)
-						{
-                     Console.WriteLine("CPF: "  + person.RetornaCpf() +
-                                    " | RG: "   + person.RetornaRg() +
-												" | Nome: " + person.RetornaNome());
-						}
-						Console.WriteLine("=====================");
+                  Cliente.ListarCliente(pessoa);
 						break;
 					case "3": // Editar Cliente
-						// Arquivo.ListarExcluida();
-						break;
+                  Cliente.AtualizaCliente(pessoa);
+                  break;
 					case "4": // Novo Contrato
 						Principal.InserirSerie();
 						break;
