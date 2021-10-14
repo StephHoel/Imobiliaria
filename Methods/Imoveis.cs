@@ -6,7 +6,7 @@ namespace Imobiliaria
    public class Imoveis
    {
         readonly private static List<Imovel> imoveis = new();
-        protected internal static void NovoImovel(string cpfProprietario)
+        protected internal static void NovoImovel(string cpfProprietario, int id)
         {
             string situacao = Input.Situacao();
             int cep = Input.Cep(); // somente números - 8 dígitos
@@ -18,7 +18,7 @@ namespace Imobiliaria
             string estado = Input.EstadoUF();
             string pais = Input.PedeString("País: ");
 
-            Imovel imovel = new(cpfProprietario, situacao, cep, logradouro, numero, complemento, bairro, cidade, estado, pais);
+            Imovel imovel = new(id, cpfProprietario, situacao, cep, logradouro, numero, complemento, bairro, cidade, estado, pais);
 
             imoveis.Add(imovel);
         }

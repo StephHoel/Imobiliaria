@@ -16,8 +16,9 @@ namespace Imobiliaria.Classes
       private bool Finalizado { get; set; }
       private bool Excluido { get; set; }
 
-      public Contrato(string cpfLocatario, int idImovel, string dataInicio, string dataFim, double valorInicial, int vencimento, bool finalizado = false, bool excluido = false)
+      public Contrato(int idContrato, string cpfLocatario, int idImovel, string dataInicio, string dataFim, double valorInicial, int vencimento, bool finalizado = false, bool excluido = false)
       {
+         this.IdContrato = idContrato;
          this.CpfLocatario = cpfLocatario;
          this.IdImovel = idImovel;
          this.DataInicio = dataInicio;
@@ -28,7 +29,8 @@ namespace Imobiliaria.Classes
          this.Excluido = excluido;
 
       }
-      public int RetornaIdContrato()
+      
+      public int RetornaId()
       {
          return this.IdContrato;
       }

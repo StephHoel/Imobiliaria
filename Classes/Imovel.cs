@@ -8,9 +8,9 @@ namespace Imobiliaria.Classes
       private string CpfProprietario { get; set; }
       private string Situacao { get; set; }
 
-      public Imovel(string cpfProprietario, string situacao, int cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais, bool excluido = false)
+      public Imovel(int idImovel, string cpfProprietario, string situacao, int cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais, bool excluido = false)
       {
-         this.IdImovel = ProximoId();
+         this.IdImovel = idImovel;
          this.CpfProprietario = cpfProprietario;
          this.Situacao = situacao;
          this.Cep = cep;
@@ -24,7 +24,7 @@ namespace Imobiliaria.Classes
          this.Excluido = excluido;
       }
 
-      public int RetornaIdImovel()
+      public int RetornaId()
       {
          return this.IdImovel;
       }
@@ -35,15 +35,6 @@ namespace Imobiliaria.Classes
       public string RetornaSituacao()
       {
          return this.Situacao;
-      }
-
-      public int ProximoId()
-      {
-         // Pegar tamanho da lista
-
-         throw new NotImplementedException();
-
-         // return 0;
       }
 
     }

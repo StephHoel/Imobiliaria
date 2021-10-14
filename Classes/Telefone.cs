@@ -2,6 +2,7 @@ namespace Imobiliaria.Classes
 {
     public class Telefone
     {
+        private int IdTelefone { get; set; }
         private string Cpf { get; set; }
         private int Cod { get; set; }
         private int Numero { get; set; }
@@ -9,14 +10,20 @@ namespace Imobiliaria.Classes
         private bool Recado { get; set; }
         private bool Excluido { get; set; }
 
-        public Telefone(string cpf, int cod, int numero, bool whatsapp, bool recado, bool excluido = false)
+        public Telefone(int id, string cpf, int cod, int numero, bool whatsapp, bool recado, bool excluido = false)
         {
+            this.IdTelefone = id;
             this.Cpf = cpf;
             this.Cod = cod;
             this.Numero = numero;
             this.Whatsapp = whatsapp;
             this.Recado = recado;
             this.Excluido = excluido;
+        }
+
+        public int RetornaId()
+        {
+            return this.IdTelefone;
         }
 
         public string RetornaCpf()

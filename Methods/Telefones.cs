@@ -10,7 +10,7 @@ namespace Imobiliaria
         static bool resultado = true;
         static bool novoNumero = false;
 
-        protected internal static void NovoTelefone(string cpf)
+        protected internal static void NovoTelefone(string cpf, int id)
         {
             do
             {
@@ -22,7 +22,7 @@ namespace Imobiliaria
                 bool whatsapp = Whatsapp();
                 bool recado = Recado();
 
-                Telefone telefone = new(cpf, cod, numero, whatsapp, recado);
+                Telefone telefone = new(id, cpf, cod, numero, whatsapp, recado);
 
                 telefones.Add(telefone);
 
