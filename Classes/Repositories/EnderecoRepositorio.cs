@@ -6,7 +6,7 @@ namespace Imobiliaria.Classes
     public class EnderecoRepositorio : IRepositorio<Endereco>
     {
         private readonly List<Endereco> listaEndereco = new();
-        public void Atualiza(int id, Endereco objeto)
+        public void Atualiza(int id, Endereco objeto, string objeto2)
         {
             listaEndereco[id] = objeto;
         }

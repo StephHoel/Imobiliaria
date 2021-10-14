@@ -11,9 +11,10 @@ namespace Imobiliaria.Classes
         readonly string path = "DataBase/pessoa.db";
         private readonly List<Pessoa> listaPessoa = new();
 
-        public void Atualiza(int id, Pessoa objeto)
+        public void Atualiza(int id, Pessoa objeto, string objeto2)
         {
             listaPessoa[id] = objeto;
+            DB.Escrever(objeto2, path);
         }
 
         public void Exclui(int id)

@@ -6,7 +6,7 @@ namespace Imobiliaria.Classes
     public class TelefoneRepositorio : IRepositorio<Telefone>
     {
         private readonly List<Telefone> listaTelefone = new();
-        public void Atualiza(int id, Telefone objeto)
+        public void Atualiza(int id, Telefone objeto, string objeto2)
         {
             listaTelefone[id] = objeto;
         }

@@ -6,7 +6,7 @@ namespace Imobiliaria.Classes
     public class ImovelRepositorio : IRepositorio<Imovel>
     {
         private readonly List<Imovel> listaImovel = new();
-        public void Atualiza(int id, Imovel objeto)
+        public void Atualiza(int id, Imovel objeto, string objeto2)
         {
             listaImovel[id] = objeto;
         }

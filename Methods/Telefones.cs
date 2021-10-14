@@ -58,7 +58,7 @@ namespace Imobiliaria
             {
                 Console.Write("Número (8 digitos para fixo ou 9 dígitos para celular): ");
                 string numInput = Console.ReadLine();
-                numInput = numInput.Length > 9 ? numInput.Substring(0, 9) : numInput;
+                numInput = numInput.Length > 9 ? numInput[..9] : numInput;
 
                 resultado = Int32.TryParse(numInput, out num);
 
@@ -77,7 +77,7 @@ namespace Imobiliaria
             {
                 Console.Write("Esse número é Whatsapp (S/N)? ");
                 string input = Console.ReadLine();
-                input = input.Length > 1 ? input.Substring(0, 1) : input;
+                input = input.Length > 1 ? input[..1] : input;
 
                 if (input.ToUpper() == "S")
                 {
@@ -99,7 +99,7 @@ namespace Imobiliaria
             {
                 Console.Write("Esse número é apenas para recado (S/N)? ");
                 string input = Console.ReadLine();
-                input = input.Length > 1 ? input.Substring(0, 1) : input;
+                input = input.Length > 1 ? input[..1] : input;
 
                 if (input.ToUpper() == "S")
                 {
@@ -121,7 +121,7 @@ namespace Imobiliaria
             {
                 Console.Write("Adicionar outro número (S/N)? ");
                 string input = Console.ReadLine();
-                input = input.Length > 1 ? input.Substring(0, 1) : input;
+                input = input.Length > 1 ? input[..1] : input;
 
                 if (input.ToUpper() == "S")
                 {

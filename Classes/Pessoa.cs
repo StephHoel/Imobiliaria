@@ -46,7 +46,7 @@ namespace Imobiliaria.Classes
         public string RetornaCpf()
         {
             string cpf = this.Cpf;
-            string novo = cpf.Substring(0, 3) + ".";
+            string novo = cpf[..3] + ".";
                    novo += cpf.Substring(3, 3) + ".";
                    novo += cpf.Substring(6, 3) + "-";
                    novo += cpf.Substring(9, 2);
@@ -59,7 +59,7 @@ namespace Imobiliaria.Classes
         public string RetornaRg()
         {
             string rg = this.Rg;
-            string novo = rg.Substring(0, 2) + ".";
+            string novo = rg[..2] + ".";
             novo += rg.Substring(2, 3) + ".";
             novo += rg.Substring(5, 3) + "-";
             novo += rg.Substring(8, 1);

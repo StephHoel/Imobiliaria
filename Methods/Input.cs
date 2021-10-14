@@ -55,7 +55,7 @@ namespace Imobiliaria
             {
                 Console.Write("CEP (apenas números): ");
                 string cepInput = Console.ReadLine();
-                cepInput = cepInput.Length > 8 ? cepInput.Substring(0, 8) : cepInput;
+                cepInput = cepInput.Length > 8 ? cepInput[..8] : cepInput;
 
                 resultado = Int32.TryParse(cepInput, out cep);
 
@@ -98,7 +98,7 @@ namespace Imobiliaria
             {
                 Console.Write("Digite apenas a sigla do Estado: ");
                 uf = Console.ReadLine();
-                uf = uf.Length > 2 ? uf.Substring(0, 2) : uf;
+                uf = uf.Length > 2 ? uf[..2] : uf;
 
                 foreach (int i in Enum.GetValues(typeof(EstadosUF)))
                 {
