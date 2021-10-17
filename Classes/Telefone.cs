@@ -25,10 +25,14 @@ namespace Imobiliaria.Classes
         {
             return this.IdTelefone;
         }
-
         public string RetornaCpf()
         {
-            return this.Cpf;
+            string cpf = this.Cpf;
+            string novo = cpf[..3] + ".";
+            novo += cpf.Substring(3, 3) + ".";
+            novo += cpf.Substring(6, 3) + "-";
+            novo += cpf.Substring(9, 2);
+            return novo;
         }
         public int RetornaCod()
         {
