@@ -12,7 +12,7 @@ namespace Imobiliaria.Interfaces
 
          void Exclui(int id);
 
-         void Atualiza(int id, T entidade, string objeto2);
+         void Atualiza(int id, T entidade, List<T> entidade2);
 
          int ProximoId();
     }
