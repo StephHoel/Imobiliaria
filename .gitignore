@@ -1,5 +1,5 @@
 bin
-obj
+App/obj
 *.lnk
 *.db
 Base
