@@ -1,12 +1,14 @@
 using System.Collections.Generic;
+using Imobiliaria.DataBase;
 using Imobiliaria.Interfaces;
 
 namespace Imobiliaria.Classes
 {
     public class EnderecoRepositorio : IRepositorio<Endereco>
-    {
+   {
+        readonly string path = "DataBase/endereco.db";
         private readonly List<Endereco> listaEndereco = new();
-        public void Atualiza(int id, Endereco objeto, string objeto2)
+        public void Atualiza(int id, Endereco objeto, List<Endereco> objeto2)
         {
             listaEndereco[id] = objeto;
         }
@@ -16,14 +18,10 @@ namespace Imobiliaria.Classes
             listaEndereco[id].Excluir();
         }
 
-        public void Insere(Endereco objeto)
+        public void Insere(Endereco objeto, string objeto2)
         {
             listaEndereco.Add(objeto);
-        }
-
-        public static void Inserir(string objeto)
-        {
-            Arquivo.Escrever(objeto, "");
+            DB.Escrever(objeto2, path);
         }
 
         public List<Endereco> Lista()
@@ -33,18 +31,22 @@ namespace Imobiliaria.Classes
 
         public int ProximoId()
         {
-            return listaEndereco.Count;
-            // return Arquivo.ProximoId();
+            int proximoLista = listaEndereco.Count;
+            int proximoDB = DB.ProximoId(path);
+
+            if (proximoLista == proximoDB)
+            {
+                return proximoDB;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public Endereco RetornaPorId(int id)
         {
             return listaEndereco[id];
         }
-
-      public void Insere(Endereco entidade, string entidade2)
-      {
-         throw new System.NotImplementedException();
-      }
    }
 }

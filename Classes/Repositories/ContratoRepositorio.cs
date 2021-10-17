@@ -4,9 +4,10 @@ using Imobiliaria.Interfaces;
 namespace Imobiliaria.Classes
 {
     public class ContratoRepositorio : IRepositorio<Contrato>
-    {
+   {
+        readonly string path = "DataBase/contrato.db";
         private readonly List<Contrato> listaContrato = new();
-        public void Atualiza(int id, Contrato objeto, string objeto2)
+        public void Atualiza(int id, Contrato objeto, List<Contrato> objeto2)
         {
             listaContrato[id] = objeto;
         }
@@ -33,8 +34,17 @@ namespace Imobiliaria.Classes
 
         public int ProximoId()
         {
-            return listaContrato.Count;
-            // return Arquivo.ProximoId();
+            int proximoLista = listaContrato.Count;
+            int proximoDB = DataBase.DB.ProximoId(path);
+
+            if (proximoLista == proximoDB)
+            {
+                return proximoDB;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public Contrato RetornaPorId(int id)
@@ -45,6 +55,10 @@ namespace Imobiliaria.Classes
       public void Insere(Contrato entidade, string entidade2)
       {
          throw new System.NotImplementedException();
+      }
+
+      private class DB
+      {
       }
    }
 }

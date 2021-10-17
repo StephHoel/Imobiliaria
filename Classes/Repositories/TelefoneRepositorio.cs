@@ -1,12 +1,14 @@
 using System.Collections.Generic;
+using Imobiliaria.DataBase;
 using Imobiliaria.Interfaces;
 
 namespace Imobiliaria.Classes
 {
     public class TelefoneRepositorio : IRepositorio<Telefone>
-    {
+   {
+        readonly string path = "DataBase/telefone.db";
         private readonly List<Telefone> listaTelefone = new();
-        public void Atualiza(int id, Telefone objeto, string objeto2)
+        public void Atualiza(int id, Telefone objeto, List<Telefone> objeto2)
         {
             listaTelefone[id] = objeto;
         }
@@ -33,8 +35,17 @@ namespace Imobiliaria.Classes
 
         public int ProximoId()
         {
-            return listaTelefone.Count;
-            // return Arquivo.ProximoId();
+            int proximoLista = listaTelefone.Count;
+            int proximoDB = DB.ProximoId(path);
+
+            if (proximoLista == proximoDB)
+            {
+                return proximoDB;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public Telefone RetornaPorId(int id)
