@@ -68,7 +68,7 @@ namespace Imobiliaria
                   Cliente.ListarCliente(pessoa, telefone);
 						break;
 					case "3": // Editar Cliente
-                  Cliente.AtualizaCliente(pessoa);
+                  Cliente.AtualizarCliente(pessoa);
                   break;
 					case "4": // Novo Contrato
 						Principal.InserirSerie();
