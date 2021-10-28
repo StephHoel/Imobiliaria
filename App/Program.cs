@@ -8,17 +8,69 @@ namespace Imobiliaria
 {
    public class Program
    {
+      static List<Contrato> contrato = ColetaContratos();
+      static List<Endereco> endereco = ColetaEnderecos();
+      static List<Imovel> imovel = ColetaImoveis();
+      static List<Pessoa> pessoa = ColetaPessoas();
+      static List<Telefone> telefone = ColetaTelefones();
+      static List<Usuario> usuario = UsuarioRepositorio.Lista();
+
+      static string opcao;
+
       static void Main()
       {
-         List<Contrato> contrato = ColetaContratos();
-         List<Endereco> endereco = ColetaEnderecos();
-         List<Imovel> imovel = ColetaImoveis();
-         List<Pessoa> pessoa = ColetaPessoas();
-         List<Telefone> telefone = ColetaTelefones();
-         List<Usuario> usuario = ColetaUsuarios();
+         string user;
+
+         try
+         {
+         Console.Clear();
+
+         }
+         catch (IOException)
+         {
+            throw;
+         }
+         // Console.WriteLine("Bem vinde ao Cadastro de Clientes e Contratos");
+         // Console.WriteLine("Cadastre seus clientes e seus contratos e não perca mais nada!");
+         Console.WriteLine("Para começar, insira uma das opções abaixo:");
+
+         do
+         {
+            Console.WriteLine("1- Novo Usuário");
+            Console.WriteLine("2- Login");
+            Console.WriteLine("X- Sair");
+            Console.WriteLine();
+            Console.Write("Informe a opção: ");
+            opcao = Console.ReadLine();
+
+            switch (opcao)
+            {
+               case "1":
+                  Usuarios.NovoUsuario();
+                  break;
+               case "2":
+                  user = Usuarios.Login();
+                  Menu();
+                  break;
+               case "X":
+                  break;
+               default:
+                  Console.WriteLine("Opção Inválida");
+                  break;
+            }
+
+         } while (opcao.ToUpper() != "X");
 
 
-			/* TODO
+
+         Console.WriteLine(Environment.NewLine + "Obrigada por utilizar nossos serviços. Até a próxima!");
+         Console.WriteLine("Pressione ENTER para sair");
+         Console.ReadLine();
+      }
+
+      private static void Menu()
+      {
+         /* TODO
 				Menu com:
 					[x]Novo Cliente
 					[]Listar Cliente (baseado em algum critério)
@@ -36,76 +88,64 @@ namespace Imobiliaria
 					[]Excluir Contrato (desativar, nunca excluir)
 			*/
 
-         Console.Clear();
-			Console.WriteLine("Bem vindx ao Cadastro de Clientes e Contratos");
-			Console.WriteLine("Cadastre seus clientes e seus contratos e não perca mais nada!");
-			string opcao;
-
-			Console.Write("Usuário: ");
-         Console.ReadLine();
-         Console.Write("Senha: ");
-         Console.ReadLine();
-
-			do
-			{
+         do
+         {
             Output.Titulo("Menu Principal");
-				Console.WriteLine("1- Novo Cliente");
-				Console.WriteLine("2- Listar Clientes");
-				Console.WriteLine("3- Editar Cliente");
-				Console.WriteLine("4- Novo Contrato");
-				Console.WriteLine("5- Listar Contratos");
-				Console.WriteLine("6- Editar Contrato");
-				Console.WriteLine("X- Sair");
+            Console.WriteLine("1- Novo Cliente");
+            Console.WriteLine("2- Listar Clientes");
+            Console.WriteLine("3- Editar Cliente");
+            Console.WriteLine("4- Novo Contrato");
+            Console.WriteLine("5- Listar Contratos");
+            Console.WriteLine("6- Editar Contrato");
+            Console.WriteLine("X- Sair");
 
-				opcao = Output.RetornoMenu();
+            opcao = Output.RetornoMenu();
 
-				switch (opcao)
-				{
-					case "1": // Novo Cliente
+            switch (opcao)
+            {
+               case "1": // Novo Cliente
                   Cliente.NovoCliente();
-						break;
-					case "2": // Listar Clientes
+                  break;
+               case "2": // Listar Clientes
                   Cliente.ListarCliente(pessoa, telefone);
-						break;
-					case "3": // Editar Cliente
+                  break;
+               case "3": // Editar Cliente
                   Cliente.AtualizarCliente(pessoa);
                   break;
-					case "4": // Novo Contrato
-						Principal.InserirSerie();
-						break;
-					case "5": // Listar Contratos
-						Principal.AtualizarSerie();
-						break;
-					case "6": // Editar Contrato
-						Principal.ExcluirSerie();
-						break;
-					case "X":
+               case "4": // Novo Contrato
+                  Principal.InserirSerie();
+                  break;
+               case "5": // Listar Contratos
+                  Principal.AtualizarSerie();
+                  break;
+               case "6": // Editar Contrato
+                  Principal.ExcluirSerie();
+                  break;
+               case "X":
+                  break;
+               default:
+                  // throw new ArgumentOutOfRangeException();
+                  Console.WriteLine("Opção Inválida");
+                  break;
+            }
 
-						break;
-					default:
-						// throw new ArgumentOutOfRangeException();
-						Console.WriteLine("Opção inválida");
-						break;
-				}
+         } while (opcao.ToUpper() != "X");
+      }
 
-			} while (opcao.ToUpper() != "X");
 
-			Console.WriteLine(Environment.NewLine + "Obrigada por utilizar nossos serviços. Até a próxima!");
-			Console.WriteLine("Pressione ENTER para sair");
-			Console.ReadLine();
-		}
+
 
       private static List<Contrato> ColetaContratos()
       {
          List<Contrato> contratos = new();
-         string[] readContrato = File.ReadAllLines("DataBase/contrato.db");
+         string[] readContrato = File.ReadAllLines("./DataBase/contrato.db");
          if (readContrato.Length != 0)
          {
             foreach (string line in readContrato)
             {
                string[] l = Output.Split(line);
 
-               Contrato contrato1 = new(contratos.Count, Encriptografia.Decrypt(l[1]), int.Parse(l[2]), l[3], l[4], double.Parse(l[5]), int.Parse(l[6]), bool.Parse(l[7]), bool.Parse(l[8]));
+               Contrato contrato1 = new(int.Parse(l[0]), Encriptografia.Decrypt(l[1]), int.Parse(l[2]), l[3], l[4], double.Parse(l[5]), int.Parse(l[6]), bool.Parse(l[7]), bool.Parse(l[8]));
                contratos.Add(contrato1);
             }
          }
@@ -115,14 +155,14 @@ namespace Imobiliaria
       private static List<Endereco> ColetaEnderecos()
       {
          List<Endereco> lista = new();
-         string[] readEndereco = File.ReadAllLines("DataBase/endereco.db");
+         string[] readEndereco = File.ReadAllLines("./DataBase/endereco.db");
          if (readEndereco.Length != 0)
          {
             foreach (string line in readEndereco)
             {
                string[] l = Output.Split(line);
 
-               Endereco endereco1 = new(lista.Count, Encriptografia.Decrypt(l[1]), int.Parse(l[2]), l[3], int.Parse(l[4]), l[5], l[6], l[7], l[8], l[9], bool.Parse(l[10]));
+               Endereco endereco1 = new(int.Parse(l[0]), Encriptografia.Decrypt(l[1]), int.Parse(l[2]), l[3], int.Parse(l[4]), l[5], l[6], l[7], l[8], l[9], bool.Parse(l[10]));
                lista.Add(endereco1);
             }
          }
@@ -132,14 +172,14 @@ namespace Imobiliaria
       private static List<Imovel> ColetaImoveis()
       {
          List<Imovel> lista = new();
-         string[] readImovel = File.ReadAllLines("DataBase/imovel.db");
+         string[] readImovel = File.ReadAllLines("./DataBase/imovel.db");
          if (readImovel.Length != 0)
          {
             foreach (string line in readImovel)
             {
                string[] l = Output.Split(line);
 
-               Imovel imovel1 = new(lista.Count, Encriptografia.Decrypt(l[1]), l[2], int.Parse(l[3]), l[4], int.Parse(l[5]), l[6], l[7], l[8], l[9], l[10], bool.Parse(l[11]));
+               Imovel imovel1 = new(int.Parse(l[0]), Encriptografia.Decrypt(l[1]), l[2], int.Parse(l[3]), l[4], int.Parse(l[5]), l[6], l[7], l[8], l[9], l[10], bool.Parse(l[11]));
                lista.Add(imovel1);
             }
          }
@@ -149,7 +189,7 @@ namespace Imobiliaria
       private static List<Pessoa> ColetaPessoas()
       {
          List<Pessoa> lista = new();
-         string[] readPessoa = File.ReadAllLines("DataBase/pessoa.db");
+         string[] readPessoa = File.ReadAllLines("./DataBase/pessoa.db");
          if (readPessoa.Length != 0)
          {
             foreach (string line in readPessoa)
@@ -161,7 +201,7 @@ namespace Imobiliaria
                string cpf = Encriptografia.Decrypt(l[1]);
                string rg = Encriptografia.Decrypt(l[3]);
 
-               Pessoa cliente = new(lista.Count, cpf, l[2], rg, l[4], l[5], l[6], l[7], l[8], l[9], l[10], l[11], l[12]);
+               Pessoa cliente = new(int.Parse(l[0]), cpf, l[2], rg, l[4], l[5], l[6], l[7], l[8], l[9], l[10], l[11], l[12]);
                lista.Add(cliente);
             }
          }
@@ -171,35 +211,19 @@ namespace Imobiliaria
       private static List<Telefone> ColetaTelefones()
       {
          List<Telefone> lista = new();
-         string[] readTelefone = File.ReadAllLines("DataBase/telefone.db");
+         string[] readTelefone = File.ReadAllLines("./DataBase/telefone.db");
          if (readTelefone.Length != 0)
          {
             foreach (string line in readTelefone)
             {
                string[] l = Output.Split(line);
 
-               Telefone tel = new(lista.Count, Encriptografia.Decrypt(l[1]), int.Parse(l[2]), int.Parse(l[3]), bool.Parse(l[4]), bool.Parse(l[5]), bool.Parse(l[6]));
+               Telefone tel = new(int.Parse(l[0]), Encriptografia.Decrypt(l[1]), int.Parse(l[2]), int.Parse(l[3]), bool.Parse(l[4]), bool.Parse(l[5]), bool.Parse(l[6]));
                lista.Add(tel);
             }
          }
          return lista;
       }
 
-      private static List<Usuario> ColetaUsuarios()
-      {
-         List<Usuario> lista = new();
-         string[] readEndereco = File.ReadAllLines("DataBase/usuario.db");
-         if (readEndereco.Length != 0)
-         {
-            foreach (string line in readEndereco)
-            {
-               string[] l = Output.Split(line);
-
-               // Usuario endereco1 = new(lista.Count, Encriptografia.Decrypt(l[1]), int.Parse(l[2]), l[3], int.Parse(l[4]), l[5], l[6], l[7], l[8], l[9], bool.Parse(l[10]));
-               // lista.Add(endereco1);
-            }
-         }
-         return lista;
-      }
    }
 }

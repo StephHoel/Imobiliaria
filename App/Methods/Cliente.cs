@@ -25,6 +25,11 @@ namespace Imobiliaria
          }
          else
          {
+            if (id == 0)
+            {
+               id++;
+            }
+
             Output.Titulo("Adicionando Novo Cliente");
 
             /* O que precisa para o cliente?
@@ -57,7 +62,7 @@ namespace Imobiliaria
             string nacionalidade = Input.PedeString("Nacionalidade: ");
             string pai = Input.PedeString("Nome do Pai: ");
             string mae = Input.PedeString("Nome da Mãe: ");
-            string email = Email();
+            string email = Input.Email();
             string fichaRapida = FichaRapida();
 
             //Telefone(s) do Cliente

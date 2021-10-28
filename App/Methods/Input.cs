@@ -5,137 +5,176 @@ using System.Threading;
 
 namespace Imobiliaria
 {
-    public class Input
-    {
-        static bool resultado = true;
+   public class Input
+   {
+      static bool resultado = true;
 
-        /* Exemplos do Código Antigo
+      /* Exemplos do Código Antigo
 
-        protected internal static int Genero()
-        {
-            Console.WriteLine(); // para ganhar um espaço entre a entrada anterior e essa
+      protected internal static int Genero()
+      {
+          Console.WriteLine(); // para ganhar um espaço entre a entrada anterior e essa
 
-            // https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getvalues?view=netcore-3.1
-            // https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getname?view=netcore-3.1
-            foreach (int i in Enum.GetValues(typeof(Genero)))
-            {
-                Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(Genero), i));
-            }
+          // https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getvalues?view=netcore-3.1
+          // https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getname?view=netcore-3.1
+          foreach (int i in Enum.GetValues(typeof(Genero)))
+          {
+              Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(Genero), i));
+          }
 
-            Console.Write(Environment.NewLine + "Digite o número do novo gênero: ");
-            return int.Parse(Console.ReadLine());
-        }
+          Console.Write(Environment.NewLine + "Digite o número do novo gênero: ");
+          return int.Parse(Console.ReadLine());
+      }
 
-        protected internal static string Titulo()
-        {
-            Console.Write("Informe o novo título: ");
-            return Console.ReadLine();
-        }
+      protected internal static string Titulo()
+      {
+          Console.Write("Informe o novo título: ");
+          return Console.ReadLine();
+      }
 
-        protected internal static int Ano()
-        {
-            Console.Write("Informe o novo ano de início (xxxx): ");
-            return int.Parse(Console.ReadLine());
-        }
+      protected internal static int Ano()
+      {
+          Console.Write("Informe o novo ano de início (xxxx): ");
+          return int.Parse(Console.ReadLine());
+      }
 
-        Fim dos Exemplos
-        */
+      Fim dos Exemplos
+      */
 
-        // Novo Sistema
-        protected internal static string PedeString(string titulo)
-        {
-            Console.Write(titulo);
-            return Console.ReadLine();
-        }
+      // Novo Sistema
+      protected internal static string PedeString(string titulo)
+      {
+         Console.Write(titulo);
+         return Console.ReadLine();
+      }
 
-        protected internal static int Cep()
-        {
-            int cep;
-            do
-            {
-                Console.Write("CEP (apenas números): ");
-                string cepInput = Console.ReadLine();
-                cepInput = cepInput.Length > 8 ? cepInput[..8] : cepInput;
+      protected internal static int Cep()
+      {
+         int cep;
+         do
+         {
+            Console.Write("CEP (apenas números): ");
+            string cepInput = Console.ReadLine();
+            cepInput = cepInput.Length > 8 ? cepInput[..8] : cepInput;
 
-                resultado = Int32.TryParse(cepInput, out cep);
+            resultado = Int32.TryParse(cepInput, out cep);
 
-                if (cepInput.Length < 8) resultado = false;
-                if (resultado == false) Console.WriteLine("**Digite apenas 8 dígitos**");
-            } while (resultado == false);
+            if (cepInput.Length < 8) resultado = false;
+            if (resultado == false) Console.WriteLine("**Digite apenas 8 dígitos**");
+         } while (resultado == false);
 
-            return cep;
-        }
+         return cep;
+      }
 
-        protected internal static int Numero()
-        {
-            int numero;
-            do
-            {
-                Console.Write("Número (digite 0 para S/N): ");
-                string numeroInput = Console.ReadLine();
+      protected internal static int Numero()
+      {
+         int numero;
+         do
+         {
+            Console.Write("Número (digite 0 para S/N): ");
+            string numeroInput = Console.ReadLine();
 
-                resultado = Int32.TryParse(numeroInput, out numero);
+            resultado = Int32.TryParse(numeroInput, out numero);
 
-                if (resultado == false) Console.WriteLine("**Digite apenas números**");
-            } while (resultado == false);
+            if (resultado == false) Console.WriteLine("**Digite apenas números**");
+         } while (resultado == false);
 
-            return numero;
-        }
+         return numero;
+      }
 
-        protected internal static string EstadoUF()
-        {
-            Console.WriteLine("Estado (UF)");
+      protected internal static string EstadoUF()
+      {
+         Console.WriteLine("Estado (UF)");
+
+         foreach (int i in Enum.GetValues(typeof(EstadosUF)))
+         {
+            Console.WriteLine(Enum.GetName(typeof(EstadosUF), i));
+         }
+
+         bool input = false;
+         string uf;
+
+         do
+         {
+            Console.Write("Digite apenas a sigla do Estado: ");
+            uf = Console.ReadLine();
+            uf = uf.Length > 2 ? uf[..2] : uf;
 
             foreach (int i in Enum.GetValues(typeof(EstadosUF)))
             {
-                Console.WriteLine(Enum.GetName(typeof(EstadosUF), i));
+               if (uf.ToUpper() == Enum.GetName(typeof(EstadosUF), i))
+               {
+                  input = true;
+                  break;
+               }
             }
 
-            bool input = false;
-            string uf;
+         } while (!input);
 
-            do
+         return uf;
+      }
+
+      protected internal static string Situacao()
+      {
+         Console.WriteLine("O imóvel está destinado à: ");
+
+         foreach (int i in Enum.GetValues(typeof(Situacao)))
+         {
+            Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(Situacao), i));
+         }
+
+         bool input = false;
+         int output = 0;
+
+         do
+         {
+            Console.WriteLine();
+            Console.Write("Digite o número da opção: ");
+            input = int.TryParse(Console.ReadLine(), out output);
+         } while (!input);
+
+         return Enum.GetName(typeof(Situacao), output);
+      }
+
+      protected internal static string Email()
+      {
+         string email;
+
+         do
+         {
+            Console.Write("Email (ex@exemp.lo): ");
+            email = Console.ReadLine();
+
+            try
             {
-                Console.Write("Digite apenas a sigla do Estado: ");
-                uf = Console.ReadLine();
-                uf = uf.Length > 2 ? uf[..2] : uf;
+               var test = email.Split('@');
 
-                foreach (int i in Enum.GetValues(typeof(EstadosUF)))
-                {
-                    if (uf.ToUpper() == Enum.GetName(typeof(EstadosUF), i))
-                    {
-                        input = true;
-                        break;
-                    }
-                }
-
-            } while (!input);
-
-            return uf;
-        }
-
-        protected internal static string Situacao()
-        {
-            Console.WriteLine("O imóvel está destinado à: ");
-
-            foreach (int i in Enum.GetValues(typeof(Situacao)))
+               if (test.Length >= 2
+                && test[0].Length != 0
+                && test[1].Split('.')[1].Length >= 2)
+               {
+                  // Console.WriteLine("Email valido");
+                  resultado = true;
+               }
+               else
+               {
+                  // Console.WriteLine("Email invalido");
+                  resultado = false;
+               }
+            }
+            catch (Exception)
             {
-                Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(Situacao), i));
+               // Console.WriteLine("Email invalido");
+               resultado = false;
             }
 
-            bool input = false;
-            int output = 0;
+            if (!resultado)
+               Console.WriteLine("**Digite corretamente o email**");
 
-            do
-            {
-                Console.WriteLine();
-                Console.Write("Digite o número da opção: ");
-                input = int.TryParse(Console.ReadLine(), out output);
-            } while (!input);
+         } while (!resultado);
 
-            return Enum.GetName(typeof(Situacao), output);
-        }
-
+         return email;
+      }
 
    }
 }

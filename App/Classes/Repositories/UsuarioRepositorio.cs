@@ -1,61 +1,75 @@
 using System.Collections.Generic;
+using System.IO;
 using Imobiliaria.DataBase;
 using Imobiliaria.Interfaces;
 
 namespace Imobiliaria.Classes
 {
-    public class UsuarioRepositorio : IRepositorio<Usuario>
+   public class UsuarioRepositorio : IRepositorio<Usuario>
    {
-        readonly string path = "DataBase/Usuario.db";
-        private readonly List<Usuario> listaUsuario = new();
-        public void Atualiza(int id, Usuario objeto, List<Usuario> objeto2)
-        {
-            listaUsuario[id] = objeto;
-        }
+      static readonly string path = "DataBase/Usuario.db";
+      private static readonly List<Usuario> listaUsuario = new();
 
-        public void Exclui(int id)
-        {
-            listaUsuario[id].Excluir();
-        }
-
-        public void Insere(Usuario objeto)
-        {
-            listaUsuario.Add(objeto);
-        }
-
-        public static void Inserir(string objeto)
-        {
-            Arquivo.Escrever(objeto, "");
-        }
-
-        public List<Usuario> Lista()
-        {
-            return listaUsuario;
-        }
-
-        public int ProximoId()
-        {
-            int proximoLista = listaUsuario.Count;
-            int proximoDB = DB.ProximoId(path);
-
-            if (proximoLista == proximoDB)
-            {
-                return proximoDB;
-            }
-            else
-            {
-                return -1;
-            }
-        }
-
-        public Usuario RetornaPorId(int id)
-        {
-            return listaUsuario[id];
-        }
-
-      public void Insere(Usuario entidade, string entidade2)
+      private static void Carrega()
       {
-         throw new System.NotImplementedException();
+         listaUsuario.Clear();
+         string[] readEndereco = File.ReadAllLines(path);
+         if (readEndereco.Length != 0)
+         {
+            foreach (string line in readEndereco)
+            {
+               string[] l = Output.Split(line);
+
+               Usuario usu = new(int.Parse(l[0]), l[1], l[2], l[3], bool.Parse(l[4]));
+               listaUsuario.Add(usu);
+            }
+         }
       }
+      public void Atualiza(int id, Usuario objeto, List<Usuario> objeto2)
+      {
+         listaUsuario[id] = objeto;
+      }
+
+      public void Exclui(int id)
+      {
+         listaUsuario[id].Excluir();
+      }
+
+      public void Insere(Usuario objeto, string objeto2)
+      {
+         listaUsuario.Add(objeto);
+         DB.Escrever(objeto2, path);
+      }
+
+      public static List<Usuario> Lista()
+      {
+         if (listaUsuario.Count == 0)
+         {
+            Carrega();
+         }
+         return listaUsuario;
+      }
+
+      public int ProximoId()
+      {
+         int proximoLista = listaUsuario.Count;
+         int proximoDB = DB.ProximoId(path);
+
+         if (proximoLista == proximoDB)
+         {
+            return proximoDB+1;
+         }
+         else
+         {
+            Carrega();
+            return ProximoId();
+         }
+      }
+
+      public Usuario RetornaPorId(int id)
+      {
+         return listaUsuario[id];
+      }
+
    }
 }

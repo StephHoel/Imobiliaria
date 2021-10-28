@@ -47,7 +47,5 @@ namespace Imobiliaria.DataBase
             string[] readText = File.ReadAllLines(path);
             return readText.Length;
         }
-
-        //
     }
 }
