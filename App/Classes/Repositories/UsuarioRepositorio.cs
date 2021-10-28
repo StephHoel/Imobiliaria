@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Imobiliaria.DataBase;
 using Imobiliaria.Interfaces;
+using Imobiliaria.Methods;
 
 namespace Imobiliaria.Classes
 {
@@ -58,7 +59,7 @@ namespace Imobiliaria.Classes
 
          if (proximoLista == proximoDB)
          {
-            return proximoDB+1;
+            return proximoDB + 1;
          }
          else
          {
@@ -82,6 +83,36 @@ namespace Imobiliaria.Classes
          }
          return false;
 
+      }
+      public static void LostPass(string user, string email)
+      {
+         foreach (var usu in listaUsuario)
+         {
+            if (user == usu.RetornaNome() && email == usu.RetornaEmail())
+            {
+               // informar nova senha
+               Console.Write("Nova Senha: ");
+               var pass = Encriptografia.Password();
+
+               Usuario u = new(usu.RetornaId(), usu.RetornaNome(), usu.RetornaEmail(), pass, usu.RetornaExcluido());
+
+               // atualizar lista e banco
+               listaUsuario[usu.RetornaId() - 1] = u;
+
+               string[] person = new string[listaUsuario.Count];
+               foreach (var usuario1 in listaUsuario)
+               {
+                  person[usuario1.RetornaId() - 1] = $"{usuario1.RetornaId()}|{usuario1.RetornaNome()}|{usuario1.RetornaEmail()}|{usuario1.RetornaSenha()}|{usuario1.RetornaExcluido()}";
+               }
+
+               DB.Atualizar(person, path);
+
+               Console.WriteLine("Senha Alterada com Sucesso");
+               break;
+            }
+            else
+               Console.WriteLine("Usuário e/ou Email Incorreto");
+         }
       }
 
    }

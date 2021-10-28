@@ -13,7 +13,7 @@ namespace Imobiliaria
       static List<Imovel> imovel = ColetaImoveis();
       static List<Pessoa> pessoa = ColetaPessoas();
       static List<Telefone> telefone = ColetaTelefones();
-      // static List<Usuario> usuario = UsuarioRepositorio.Lista();
+      static List<Usuario> usuario = UsuarioRepositorio.Lista();
 
       static string opcao;
 
@@ -39,7 +39,7 @@ namespace Imobiliaria
          {
             Console.WriteLine("1- Novo Usuário");
             Console.WriteLine("2- Login");
-            Console.WriteLine("3- Login");
+            Console.WriteLine("3- Esqueci a Senha");
             Console.WriteLine("X- Sair");
             Console.WriteLine();
             Console.Write("Informe a opção: ");
@@ -54,6 +54,9 @@ namespace Imobiliaria
                   user = Usuarios.Login();
                   if (user != "")
                      Menu();
+                  break;
+               case "3":
+                  Usuarios.EsqueciSenha();
                   break;
                case "X":
                   break;
