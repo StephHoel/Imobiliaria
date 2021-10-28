@@ -6,20 +6,20 @@ namespace Imobiliaria.Classes
     public class ContratoRepositorio : IRepositorio<Contrato>
    {
         readonly string path = "DataBase/contrato.db";
-        private readonly List<Contrato> listaContrato = new();
+        private readonly List<Contrato> lista = new();
         public void Atualiza(int id, Contrato objeto, List<Contrato> objeto2)
         {
-            listaContrato[id] = objeto;
+            lista[id] = objeto;
         }
 
         public void Exclui(int id)
         {
-            listaContrato[id].Excluir();
+            lista[id].Excluir();
         }
 
         public void Insere(Contrato objeto)
         {
-            listaContrato.Add(objeto);
+            lista.Add(objeto);
         }
 
         public static void Inserir(string objeto)
@@ -29,12 +29,12 @@ namespace Imobiliaria.Classes
 
         public List<Contrato> Lista()
         {
-            return listaContrato;
+            return lista;
         }
 
         public int ProximoId()
         {
-            int proximoLista = listaContrato.Count;
+            int proximoLista = lista.Count;
             int proximoDB = DataBase.DB.ProximoId(path);
 
             if (proximoLista == proximoDB)
@@ -49,7 +49,7 @@ namespace Imobiliaria.Classes
 
         public Contrato RetornaPorId(int id)
         {
-            return listaContrato[id];
+            return lista[id];
         }
 
       public void Insere(Contrato entidade, string entidade2)

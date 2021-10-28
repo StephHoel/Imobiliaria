@@ -10,11 +10,11 @@ namespace Imobiliaria.Classes
    public class UsuarioRepositorio : IRepositorio<Usuario>
    {
       static readonly string path = "DataBase/Usuario.db";
-      private static readonly List<Usuario> listaUsuario = new();
+      private static readonly List<Usuario> lista = new();
 
       private static void Carrega()
       {
-         listaUsuario.Clear();
+         lista.Clear();
          string[] readEndereco = File.ReadAllLines(path);
          if (readEndereco.Length != 0)
          {
@@ -23,38 +23,38 @@ namespace Imobiliaria.Classes
                string[] l = Output.Split(line);
 
                Usuario usu = new(int.Parse(l[0]), l[1], l[2], l[3], bool.Parse(l[4]));
-               listaUsuario.Add(usu);
+               lista.Add(usu);
             }
          }
       }
       public void Atualiza(int id, Usuario objeto, List<Usuario> objeto2)
       {
-         listaUsuario[id] = objeto;
+         lista[id] = objeto;
       }
 
       public void Exclui(int id)
       {
-         listaUsuario[id].Excluir();
+         lista[id].Excluir();
       }
 
       public void Insere(Usuario objeto, string objeto2)
       {
-         listaUsuario.Add(objeto);
+         lista.Add(objeto);
          DB.Escrever(objeto2, path);
       }
 
       public static List<Usuario> Lista()
       {
-         if (listaUsuario.Count == 0)
+         if (lista.Count == 0)
          {
             Carrega();
          }
-         return listaUsuario;
+         return lista;
       }
 
       public int ProximoId()
       {
-         int proximoLista = listaUsuario.Count;
+         int proximoLista = lista.Count;
          int proximoDB = DB.ProximoId(path);
 
          if (proximoLista == proximoDB)
@@ -70,11 +70,11 @@ namespace Imobiliaria.Classes
 
       public Usuario RetornaPorId(int id)
       {
-         return listaUsuario[id];
+         return lista[id];
       }
       public static Boolean GetLogin(string user, string pass)
       {
-         foreach (var usu in listaUsuario)
+         foreach (var usu in lista)
          {
             if (user == usu.RetornaNome() && pass == usu.RetornaSenha())
             {
@@ -86,7 +86,7 @@ namespace Imobiliaria.Classes
       }
       public static void LostPass(string user, string email)
       {
-         foreach (var usu in listaUsuario)
+         foreach (var usu in lista)
          {
             if (user == usu.RetornaNome() && email == usu.RetornaEmail())
             {
@@ -97,10 +97,10 @@ namespace Imobiliaria.Classes
                Usuario u = new(usu.RetornaId(), usu.RetornaNome(), usu.RetornaEmail(), pass, usu.RetornaExcluido());
 
                // atualizar lista e banco
-               listaUsuario[usu.RetornaId() - 1] = u;
+               lista[usu.RetornaId() - 1] = u;
 
-               string[] person = new string[listaUsuario.Count];
-               foreach (var usuario1 in listaUsuario)
+               string[] person = new string[lista.Count];
+               foreach (var usuario1 in lista)
                {
                   person[usuario1.RetornaId() - 1] = $"{usuario1.RetornaId()}|{usuario1.RetornaNome()}|{usuario1.RetornaEmail()}|{usuario1.RetornaSenha()}|{usuario1.RetornaExcluido()}";
                }

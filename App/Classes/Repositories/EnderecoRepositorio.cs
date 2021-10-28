@@ -7,31 +7,31 @@ namespace Imobiliaria.Classes
     public class EnderecoRepositorio : IRepositorio<Endereco>
    {
         readonly string path = "DataBase/endereco.db";
-        private readonly List<Endereco> listaEndereco = new();
+        private readonly List<Endereco> lista = new();
         public void Atualiza(int id, Endereco objeto, List<Endereco> objeto2)
         {
-            listaEndereco[id] = objeto;
+            lista[id] = objeto;
         }
 
         public void Exclui(int id)
         {
-            listaEndereco[id].Excluir();
+            lista[id].Excluir();
         }
 
         public void Insere(Endereco objeto, string objeto2)
         {
-            listaEndereco.Add(objeto);
+            lista.Add(objeto);
             DB.Escrever(objeto2, path);
         }
 
         public List<Endereco> Lista()
         {
-            return listaEndereco;
+            return lista;
         }
 
         public int ProximoId()
         {
-            int proximoLista = listaEndereco.Count;
+            int proximoLista = lista.Count;
             int proximoDB = DB.ProximoId(path);
 
             if (proximoLista == proximoDB)
@@ -46,7 +46,7 @@ namespace Imobiliaria.Classes
 
         public Endereco RetornaPorId(int id)
         {
-            return listaEndereco[id];
+            return lista[id];
         }
    }
 }

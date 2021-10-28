@@ -7,20 +7,20 @@ namespace Imobiliaria.Classes
     public class TelefoneRepositorio : IRepositorio<Telefone>
    {
         readonly string path = "DataBase/telefone.db";
-        private readonly List<Telefone> listaTelefone = new();
+        private readonly List<Telefone> lista = new();
         public void Atualiza(int id, Telefone objeto, List<Telefone> objeto2)
         {
-            listaTelefone[id] = objeto;
+            lista[id] = objeto;
         }
 
         public void Exclui(int id)
         {
-            listaTelefone[id].Excluir();
+            lista[id].Excluir();
         }
 
         public void Insere(Telefone objeto)
         {
-            listaTelefone.Add(objeto);
+            lista.Add(objeto);
         }
 
         public static void Inserir(string objeto)
@@ -30,12 +30,12 @@ namespace Imobiliaria.Classes
 
         public List<Telefone> Lista()
         {
-            return listaTelefone;
+            return lista;
         }
 
         public int ProximoId()
         {
-            int proximoLista = listaTelefone.Count;
+            int proximoLista = lista.Count;
             int proximoDB = DB.ProximoId(path);
 
             if (proximoLista == proximoDB)
@@ -50,7 +50,7 @@ namespace Imobiliaria.Classes
 
         public Telefone RetornaPorId(int id)
         {
-            return listaTelefone[id];
+            return lista[id];
         }
 
       public void Insere(Telefone entidade, string entidade2)
