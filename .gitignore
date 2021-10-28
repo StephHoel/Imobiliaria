@@ -6,3 +6,5 @@ Base
 .vscode
 .env
 node_modules
+appsettings.json
+schema.prisma
