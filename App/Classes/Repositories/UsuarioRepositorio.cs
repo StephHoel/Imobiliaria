@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Imobiliaria.DataBase;
@@ -69,6 +70,18 @@ namespace Imobiliaria.Classes
       public Usuario RetornaPorId(int id)
       {
          return listaUsuario[id];
+      }
+      public static Boolean GetLogin(string user, string pass)
+      {
+         foreach (var usu in listaUsuario)
+         {
+            if (user == usu.RetornaNome() && pass == usu.RetornaSenha())
+            {
+               return true;
+            }
+         }
+         return false;
+
       }
 
    }

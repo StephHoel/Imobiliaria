@@ -13,7 +13,7 @@ namespace Imobiliaria
       static List<Imovel> imovel = ColetaImoveis();
       static List<Pessoa> pessoa = ColetaPessoas();
       static List<Telefone> telefone = ColetaTelefones();
-      static List<Usuario> usuario = UsuarioRepositorio.Lista();
+      // static List<Usuario> usuario = UsuarioRepositorio.Lista();
 
       static string opcao;
 
@@ -23,21 +23,23 @@ namespace Imobiliaria
 
          try
          {
-         Console.Clear();
+            Console.Clear();
 
          }
          catch (IOException)
          {
-            throw;
+
          }
          // Console.WriteLine("Bem vinde ao Cadastro de Clientes e Contratos");
          // Console.WriteLine("Cadastre seus clientes e seus contratos e não perca mais nada!");
-         Console.WriteLine("Para começar, insira uma das opções abaixo:");
+         // Console.WriteLine("Para começar, insira uma das opções abaixo:");
+         // Console.WriteLine();
 
          do
          {
             Console.WriteLine("1- Novo Usuário");
             Console.WriteLine("2- Login");
+            Console.WriteLine("3- Login");
             Console.WriteLine("X- Sair");
             Console.WriteLine();
             Console.Write("Informe a opção: ");
@@ -50,15 +52,16 @@ namespace Imobiliaria
                   break;
                case "2":
                   user = Usuarios.Login();
-                  Menu();
+                  if (user != "")
+                     Menu();
                   break;
                case "X":
                   break;
                default:
-                  Console.WriteLine("Opção Inválida");
+                  Console.WriteLine("**Opção Inválida**");
                   break;
             }
-
+            Console.WriteLine();
          } while (opcao.ToUpper() != "X");
 
 

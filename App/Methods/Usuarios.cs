@@ -45,11 +45,19 @@ namespace Imobiliaria
 
       protected internal static string Login()
       {
+         string usuario, senha;
          Console.WriteLine();
          Console.Write("Usuário: ");
-         Console.ReadLine();
+         usuario = Console.ReadLine();
          Console.Write("Senha: ");
-         Console.ReadLine();
+         senha = Encriptografia.Password();
+
+         if(UsuarioRepositorio.GetLogin(usuario, senha))
+         {
+            return usuario;
+         }
+
+         Console.WriteLine("Usuário e/ou Senha Incorreto");
          return "";
       }
 
