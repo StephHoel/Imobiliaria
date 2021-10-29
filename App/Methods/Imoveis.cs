@@ -19,7 +19,7 @@ namespace Imobiliaria
             else
             {
                 string situacao = Input.Situacao();
-                int cep = Input.Cep(); // somente números - 8 dígitos
+                string cep = Input.Cep(); // somente números - 8 dígitos
                 string logradouro = Input.PedeString("Logradouro (sem número): ");
                 int numero = Input.Numero(); // 0 para sem número ou S/N
                 string complemento = Input.PedeString("Complemento (deixar vazio caso não exista complemento): ");

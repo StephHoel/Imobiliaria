@@ -6,8 +6,8 @@ namespace Imobiliaria.Classes
 {
     public class ImovelRepositorio : IRepositorio<Imovel>
    {
-        readonly string path = "DataBase/imovel.db";
-        private readonly List<Imovel> lista = new();
+        readonly static string path = "DataBase/imovel.db";
+        private static readonly List<Imovel> lista = new();
         public void Atualiza(int id, Imovel objeto, List<Imovel> objeto2)
         {
             lista[id] = objeto;
@@ -28,7 +28,7 @@ namespace Imobiliaria.Classes
             Arquivo.Escrever(objeto, "");
         }
 
-        public List<Imovel> Lista()
+        public static List<Imovel> Lista()
         {
             return lista;
         }

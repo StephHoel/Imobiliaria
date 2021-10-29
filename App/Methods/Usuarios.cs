@@ -9,7 +9,6 @@ namespace Imobiliaria
    public class Usuarios
    {
       static readonly UsuarioRepositorio repositorio = new();
-      static bool resultado = true;
 
       protected internal static void NovoUsuario()
       {
@@ -47,10 +46,8 @@ namespace Imobiliaria
       {
          string usuario, senha;
          Console.WriteLine();
-         Console.Write("Usuário: ");
-         usuario = Console.ReadLine();
-         Console.Write("Senha: ");
-         senha = Encriptografia.Password();
+         usuario = Input.PedeString("Usuário: ");
+         senha = Input.Senha();
 
          if (UsuarioRepositorio.GetLogin(usuario, senha))
          {

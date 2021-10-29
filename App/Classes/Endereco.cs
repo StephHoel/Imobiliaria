@@ -5,7 +5,7 @@ namespace Imobiliaria.Classes
       private int IdEndereco { get; set; }
       private string Cpf { get; set; }
 
-      public Endereco(int id, string cpf, int cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais, bool excluido = false)
+      public Endereco(int id, string cpf, string cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais, bool excluido = false)
       {
          this.IdEndereco = id;
          this.Cpf = cpf;

@@ -2,7 +2,7 @@ namespace Imobiliaria.Classes
 {
     public abstract class EnderecoBase
     {
-      protected internal int Cep { get; set; }
+      protected internal string Cep { get; set; }
       protected internal string Logradouro { get; set; }
       protected internal int Numero { get; set; }
       protected internal string Complemento { get; set; }
@@ -12,7 +12,7 @@ namespace Imobiliaria.Classes
       protected internal string Pais { get; set; }
       protected internal bool Excluido { get; set; }
 
-      public int RetornaCep()
+      public string RetornaCep()
       {
          return this.Cep;
       }

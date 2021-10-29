@@ -5,8 +5,8 @@ namespace Imobiliaria.Classes
 {
     public class ContratoRepositorio : IRepositorio<Contrato>
    {
-        readonly string path = "DataBase/contrato.db";
-        private readonly List<Contrato> lista = new();
+        readonly static string path = "DataBase/contrato.db";
+        private static readonly List<Contrato> lista = new();
         public void Atualiza(int id, Contrato objeto, List<Contrato> objeto2)
         {
             lista[id] = objeto;
@@ -27,7 +27,7 @@ namespace Imobiliaria.Classes
             Arquivo.Escrever(objeto, "");
         }
 
-        public List<Contrato> Lista()
+        public static List<Contrato> Lista()
         {
             return lista;
         }

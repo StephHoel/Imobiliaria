@@ -2,13 +2,13 @@ using System;
 
 namespace Imobiliaria.Classes
 {
-    public class Imovel : EnderecoBase
-    {
+   public class Imovel : EnderecoBase
+   {
       private int IdImovel { get; set; }
       private string CpfProprietario { get; set; }
       private string Situacao { get; set; }
 
-      public Imovel(int idImovel, string cpfProprietario, string situacao, int cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais, bool excluido = false)
+      public Imovel(int idImovel, string cpfProprietario, string situacao, string cep, string logradouro, int numero, string complemento, string bairro, string cidade, string estado, string pais, bool excluido = false)
       {
          this.IdImovel = idImovel;
          this.CpfProprietario = cpfProprietario;
@@ -37,5 +37,5 @@ namespace Imobiliaria.Classes
          return this.Situacao;
       }
 
-    }
+   }
 }

@@ -10,7 +10,6 @@ namespace Imobiliaria
    public class Cliente
    {
       // Variáveis
-      private static bool resultado = true;
       static readonly PessoaRepositorio repositorio = new();
 
       // Funções Disponíveis
@@ -25,14 +24,9 @@ namespace Imobiliaria
          }
          else
          {
-            if (id == 0)
-            {
-               id++;
-            }
-
             Output.Titulo("Adicionando Novo Cliente");
 
-            /* O que precisa para o cliente?
+            {/* O que precisa para o cliente?
                -> CPF (encriptografado) [int] [primary key]
                -> Nome Completo [string]
                -> RG (encriptografado) [int]
@@ -50,20 +44,21 @@ namespace Imobiliaria
                -> Telefone (outra table)
                ->
             */
+            }
 
             //Informação Básica do Cliente
-            string cpf = Encriptografia.Encrypt(Cpf("CPF (apenas números): "));
+            string cpf = Input.Cpf("CPF (apenas números): ");
             string nome = Input.PedeString("Nome Completo (sem abreviação): ");
-            string rg = Encriptografia.Encrypt(Rg());
-            string orgaouf = OrgaoUF();
-            string dataNasc = DataNasc();
-            string estadoCivil = EstadoCivil();
+            string rg = Input.Rg();
+            string orgaouf = Input.OrgaoUF();
+            string dataNasc = Input.DataNasc();
+            string estadoCivil = Input.EstadoCivil();
             string naturalidade = Input.PedeString("Naturalidade: ");
             string nacionalidade = Input.PedeString("Nacionalidade: ");
             string pai = Input.PedeString("Nome do Pai: ");
             string mae = Input.PedeString("Nome da Mãe: ");
             string email = Input.Email();
-            string fichaRapida = FichaRapida();
+            string fichaRapida = Input.FichaRapida();
 
             //Telefone(s) do Cliente
             Telefones.NovoTelefone(cpf);
@@ -112,7 +107,7 @@ namespace Imobiliaria
          Output.Titulo("Atualizando Cliente");
 
          //Pergunta qual cliente será editado
-         string inputCpf = Cpf("Insira o CPF do cliente (apenas números): ");
+         string inputCpf = Input.Cpf("Insira o CPF do cliente (apenas números): ");
          int id = -1;
          string cpf = "", nome = "", rg = "", orgaouf = "", dataNasc = "", estadoCivil = "", naturalidade = "", nacionalidade = "", pai = "", mae = "", email = "", fichaRapida = "";
 
@@ -151,7 +146,7 @@ namespace Imobiliaria
 
             //Atualizar CPF
             Console.WriteLine($"O CPF anterior era {cpf} e para mantê-lo, basta digitar novamente");
-            temp = Encriptografia.Encrypt(Cpf("CPF (apenas números): "));
+            temp = Encriptografia.Encrypt(Input.Cpf("CPF (apenas números): "));
             cpf = temp == "" ? cpf : temp;
 
             //Atualizar Nome
@@ -161,22 +156,22 @@ namespace Imobiliaria
 
             //Atualizar RG
             Console.WriteLine($"O RG anterior era {rg} e para mantê-lo, basta digitar novamente");
-            temp = Encriptografia.Encrypt(Rg());
+            temp = Encriptografia.Encrypt(Input.Rg());
             rg = temp == "" ? rg : temp;
 
             //Atualizar Órgão e UF
             Console.WriteLine($"O Órgão e UF anterior eram {orgaouf} e para mantê-lo, basta digitar novamente");
-            temp = OrgaoUF();
+            temp = Input.OrgaoUF();
             orgaouf = temp == "" ? orgaouf : temp;
 
             //Atualizar Data de Nascimento
             Console.WriteLine($"A data de nascimento anterior era {dataNasc} e para mantê-lo, basta digitar novamente");
-            temp = DataNasc();
+            temp = Input.DataNasc();
             dataNasc = temp == "" ? dataNasc : temp;
 
             //Atualizar Estado Civil
             Console.WriteLine($"O estado civil anterior era {estadoCivil} e para mantê-lo, basta digitar novamente");
-            temp = EstadoCivil();
+            temp = Input.EstadoCivil();
             estadoCivil = temp == "" ? estadoCivil : temp;
 
             //Atualizar Naturalidade
@@ -201,12 +196,12 @@ namespace Imobiliaria
 
             //Atualizar E-mail
             Console.WriteLine($"O e-mail anterior era {email} e para mantê-lo, basta digitar novamente");
-            temp = Email();
+            temp = Input.Email();
             email = temp == "" ? email : temp;
 
             //Atualizar Ficha Rápida
             Console.WriteLine($"A situação da ficha rápida anterior era {fichaRapida} e para mantê-lo, basta digitar novamente");
-            temp = FichaRapida();
+            temp = Input.FichaRapida();
             fichaRapida = temp == "" ? fichaRapida : temp;
 
             //Telefone(s) do Cliente
@@ -223,149 +218,5 @@ namespace Imobiliaria
 
       }
 
-
-      // Funções Internas
-      private static string Cpf(string titulo)
-      {
-         long cpf;
-         do
-         {
-            Console.Write(titulo);
-            string cpfInput = Console.ReadLine();
-            cpfInput = cpfInput.Length > 11 ? cpfInput[..11] : cpfInput;
-            resultado = Int64.TryParse(cpfInput, out cpf);
-            if (!resultado) Console.WriteLine("**Digite apenas números**");
-         } while (!resultado);
-
-         return NormalizeCpf(cpf.ToString());
-      }
-
-      private static string Rg()
-      {
-         long rg;
-         do
-         {
-            Console.Write("RG (apenas números): ");
-            string rgInput = Console.ReadLine();
-            rgInput = rgInput.Length > 9 ? rgInput[..9] : rgInput;
-            resultado = Int64.TryParse(rgInput, out rg);
-            if (resultado == false) Console.WriteLine("**Digite apenas números**");
-         } while (resultado == false);
-
-         return rg.ToString();
-      }
-
-      private static string OrgaoUF()
-      {
-         string[] output;
-         string orgaouf;
-
-         do
-         {
-            Console.Write("Órgão Expedidor/UF: ");
-            orgaouf = Console.ReadLine();
-
-            output = orgaouf.Split('/');
-
-            if (output.Length != 2)
-               Console.WriteLine("**Use uma barra (/) entre o Órgão Expedidor e o UF**");
-
-         } while (output.Length != 2);
-
-         return orgaouf;
-      }
-
-      private static string DataNasc()
-      {
-         DateTime data;
-         string linha;
-
-         do
-         {
-            Console.Write("Digite a data de nascimento (dd/mm/aaaa): ");
-            linha = Console.ReadLine();
-
-            resultado = DateTime.TryParse(linha, new CultureInfo("pt-BR"), DateTimeStyles.None, out data);
-
-            if (!resultado)
-            {
-               Console.WriteLine("**Use o formato correto (dd/mm/aaaa)**");
-            }
-
-         } while (!resultado);
-
-         return data.ToString("dd/MM/yyyy");
-      }
-
-      private static string Email()
-      {
-         string email;
-
-         do
-         {
-            Console.Write("Email (exemplo@exemplo.com): ");
-            email = Console.ReadLine();
-
-            var addr = new MailAddress(email);
-            resultado = addr.Address.Equals(email);
-
-            if (!resultado)
-               Console.WriteLine("**Digite corretamente o email**");
-
-         } while (!resultado);
-
-         return email;
-      }
-
-      private static string EstadoCivil()
-      {
-         Console.WriteLine("Estado Civil:");
-
-         foreach (int i in Enum.GetValues(typeof(EstadoCivil)))
-         {
-            Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(EstadoCivil), i));
-         }
-
-         int output = 0;
-
-         do
-         {
-            Console.WriteLine();
-            Console.Write("Digite o número da opção: ");
-            resultado = int.TryParse(Console.ReadLine(), out output);
-         } while (!resultado);
-
-         return Enum.GetName(typeof(EstadoCivil), output);
-      }
-
-      private static string FichaRapida()
-      {
-         Console.WriteLine("Ficha Rapida:");
-
-         foreach (int i in Enum.GetValues(typeof(FichaRapida)))
-         {
-            Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(FichaRapida), i));
-         }
-
-         int output = 0;
-
-         do
-         {
-            Console.WriteLine();
-            Console.Write("Digite o número da opção: ");
-            resultado = int.TryParse(Console.ReadLine(), out output);
-         } while (!resultado);
-
-         return Enum.GetName(typeof(FichaRapida), output);
-      }
-
-      private static string NormalizeCpf(string cpf)
-      {
-         string novo = cpf[..3] + "."
-                     + cpf.Substring(3, 3) + "."
-                     + cpf.Substring(6, 3) + "-"
-                     + cpf.Substring(9, 2);
-         return novo;
-      }
    }
 }

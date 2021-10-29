@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Net.Mail;
 using System.Threading;
+using Imobiliaria.Methods;
 
 namespace Imobiliaria
 {
@@ -9,46 +10,13 @@ namespace Imobiliaria
    {
       static bool resultado = true;
 
-      /* Exemplos do Código Antigo
-
-      protected internal static int Genero()
-      {
-          Console.WriteLine(); // para ganhar um espaço entre a entrada anterior e essa
-
-          // https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getvalues?view=netcore-3.1
-          // https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getname?view=netcore-3.1
-          foreach (int i in Enum.GetValues(typeof(Genero)))
-          {
-              Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(Genero), i));
-          }
-
-          Console.Write(Environment.NewLine + "Digite o número do novo gênero: ");
-          return int.Parse(Console.ReadLine());
-      }
-
-      protected internal static string Titulo()
-      {
-          Console.Write("Informe o novo título: ");
-          return Console.ReadLine();
-      }
-
-      protected internal static int Ano()
-      {
-          Console.Write("Informe o novo ano de início (xxxx): ");
-          return int.Parse(Console.ReadLine());
-      }
-
-      Fim dos Exemplos
-      */
-
-      // Novo Sistema
       protected internal static string PedeString(string titulo)
       {
          Console.Write(titulo);
          return Console.ReadLine();
       }
 
-      protected internal static int Cep()
+      protected internal static string Cep()
       {
          int cep;
          do
@@ -63,7 +31,12 @@ namespace Imobiliaria
             if (resultado == false) Console.WriteLine("**Digite apenas 8 dígitos**");
          } while (resultado == false);
 
-         return cep;
+         string cepN = cep.ToString();
+
+         string novo = cepN[..2] + "."
+                     + cepN.Substring(2, 3) + "-"
+                     + cepN.Substring(6, 2);
+         return novo;
       }
 
       protected internal static int Numero()
@@ -111,7 +84,7 @@ namespace Imobiliaria
 
          } while (!input);
 
-         return uf;
+         return uf.ToUpper();
       }
 
       protected internal static string Situacao()
@@ -176,5 +149,142 @@ namespace Imobiliaria
          return email;
       }
 
+      protected internal static string Cpf(string titulo)
+      {
+         long cpf;
+         do
+         {
+            Console.Write(titulo);
+            string cpfInput = Console.ReadLine();
+            cpfInput = cpfInput.Length > 11 ? cpfInput[..11] : cpfInput;
+            resultado = Int64.TryParse(cpfInput, out cpf);
+            if (!resultado) Console.WriteLine("**Digite apenas números**");
+         } while (!resultado);
+
+         return Encriptografia.Encrypt(NormalizeCpf(cpf.ToString()));
+      }
+
+      protected internal static string Rg()
+      {
+         long rg;
+         do
+         {
+            Console.Write("RG (apenas números): ");
+            string rgInput = Console.ReadLine();
+            rgInput = rgInput.Length > 9 ? rgInput[..9] : rgInput;
+            resultado = Int64.TryParse(rgInput, out rg);
+            if (resultado == false) Console.WriteLine("**Digite apenas números**");
+         } while (resultado == false);
+
+         return Encriptografia.Encrypt(NormalizeRg(rg.ToString()));
+      }
+
+      protected internal static string OrgaoUF()
+      {
+         string orgao, uf;
+
+         Console.Write("Órgão Expedidor: ");
+         orgao = Console.ReadLine();
+
+         do
+         {
+            Console.Write("UF: ");
+            uf = Console.ReadLine().ToUpper();
+
+            if (uf.Length != 2)
+               Console.WriteLine("**UF Inválido**");
+
+         } while (uf.Length != 2);
+
+         return orgao + "/" + uf;
+      }
+
+      protected internal static string DataNasc()
+      {
+         DateTime data;
+         string linha;
+
+         do
+         {
+            Console.Write("Digite a data de nascimento (dd/mm/aaaa): ");
+            linha = Console.ReadLine();
+
+            resultado = DateTime.TryParse(linha, new CultureInfo("pt-BR"), DateTimeStyles.None, out data);
+
+            if (!resultado)
+            {
+               Console.WriteLine("**Use o formato correto (dd/mm/aaaa)**");
+            }
+
+         } while (!resultado);
+
+         return data.ToString("dd/MM/yyyy");
+      }
+
+      protected internal static string EstadoCivil()
+      {
+         Console.WriteLine("Estado Civil:");
+
+         foreach (int i in Enum.GetValues(typeof(EstadoCivil)))
+         {
+            Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(EstadoCivil), i));
+         }
+
+         int output = 0;
+
+         do
+         {
+            Console.WriteLine();
+            Console.Write("Digite o número da opção: ");
+            resultado = int.TryParse(Console.ReadLine(), out output);
+         } while (!resultado);
+
+         return Enum.GetName(typeof(EstadoCivil), output);
+      }
+
+      protected internal static string FichaRapida()
+      {
+         Console.WriteLine("Ficha Rapida:");
+
+         foreach (int i in Enum.GetValues(typeof(FichaRapida)))
+         {
+            Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(FichaRapida), i));
+         }
+
+         int output = 0;
+
+         do
+         {
+            Console.WriteLine();
+            Console.Write("Digite o número da opção: ");
+            resultado = int.TryParse(Console.ReadLine(), out output);
+         } while (!resultado);
+
+         return Enum.GetName(typeof(FichaRapida), output);
+      }
+
+      protected internal static string NormalizeCpf(string cpf)
+      {
+         string novo = cpf[..3] + "."
+                     + cpf.Substring(3, 3) + "."
+                     + cpf.Substring(6, 3) + "-"
+                     + cpf.Substring(9, 2);
+         return novo;
+      }
+
+      protected internal static string NormalizeRg(string rg)
+      {
+         string novo = rg[..2] + "."
+                     + rg.Substring(2, 3) + "."
+                     + rg.Substring(5, 3) + "-"
+                     + rg.Substring(8, 1);
+         return novo;
+      }
+
+      protected internal static string Senha()
+      {
+         Console.Write("Senha: ");
+         return Encriptografia.Password();
+      }
    }
 }
