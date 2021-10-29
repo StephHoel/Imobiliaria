@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobiliaria.App", "App\Imobiliaria.App.csproj", "{63EBFA7A-9AF3-40E7-A362-4FBD8C19BB9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobiliaria.WebApp", "WebApp\Imobiliaria.WebApp.csproj", "{BE235828-6D84-4686-A124-BC24B1390C40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imobiliaria.Web", "Web\Imobiliaria.Web.csproj", "{F0716F6C-6CE5-49CC-A2F7-CA73C2AC83C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,5 +44,17 @@ Global
 		{BE235828-6D84-4686-A124-BC24B1390C40}.Release|x64.Build.0 = Release|Any CPU
 		{BE235828-6D84-4686-A124-BC24B1390C40}.Release|x86.ActiveCfg = Release|Any CPU
 		{BE235828-6D84-4686-A124-BC24B1390C40}.Release|x86.Build.0 = Release|Any CPU
+		{F0716F6C-6CE5-49CC-A2F7-CA73C2AC83C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0716F6C-6CE5-49CC-A2F7-CA73C2AC83C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0716F6C-6CE5-49CC-A2F7-CA73C2AC83C0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F0716F6C-6CE5-49CC-A2F7-CA73C2AC83C0}.Debug|x64.Build.0 = Debug|Any CPU
+		{F0716F6C-6CE5-49CC-A2F7-CA73C2AC83C0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F0716F6C-6CE5-49CC-A2F7-CA73C2AC83C0}.Debug|x86.Build.0 = Debug|Any CPU
+		{F0716F6C-6CE5-49CC-A2F7-CA73C2AC83C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0716F6C-6CE5-49CC-A2F7-CA73C2AC83C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0716F6C-6CE5-49CC-A2F7-CA73C2AC83C0}.Release|x64.ActiveCfg = Release|Any CPU
+		{F0716F6C-6CE5-49CC-A2F7-CA73C2AC83C0}.Release|x64.Build.0 = Release|Any CPU
+		{F0716F6C-6CE5-49CC-A2F7-CA73C2AC83C0}.Release|x86.ActiveCfg = Release|Any CPU
+		{F0716F6C-6CE5-49CC-A2F7-CA73C2AC83C0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

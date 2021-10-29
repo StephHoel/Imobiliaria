@@ -1,0 +1,8 @@
+/* Login */
+#link a {
+  color: rgb(110, 110, 110);
+  text-decoration: none;
+}
+#link a:hover {
+  color: rgb(48, 48, 48);
+}
