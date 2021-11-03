@@ -1,7 +1,5 @@
 using System;
 using System.Globalization;
-using System.Net.Mail;
-using System.Threading;
 using Imobiliaria.Methods;
 
 namespace Imobiliaria
@@ -10,10 +8,17 @@ namespace Imobiliaria
    {
       static bool resultado = true;
 
-      protected internal static string PedeString(string titulo)
+      protected internal static string PedeString(string titulo, bool edit = false, string import = null)
       {
          Console.Write(titulo);
-         return Console.ReadLine();
+         string str = Console.ReadLine();
+
+         if (edit && str == "" && import != null)
+         {
+            return import;
+         }
+
+         return str;
       }
 
       protected internal static string Cep()
@@ -109,14 +114,20 @@ namespace Imobiliaria
          return Enum.GetName(typeof(Situacao), output);
       }
 
-      protected internal static string Email()
+      protected internal static string Email(bool edit = false, string import = null)
       {
          string email;
+         resultado = false;
 
          do
          {
             Console.Write("Email (ex@exemp.lo): ");
             email = Console.ReadLine();
+
+            if (edit && email == "" && import != null)
+            {
+               return import;
+            }
 
             try
             {
@@ -128,11 +139,6 @@ namespace Imobiliaria
                {
                   // Console.WriteLine("Email valido");
                   resultado = true;
-               }
-               else
-               {
-                  // Console.WriteLine("Email invalido");
-                  resultado = false;
                }
             }
             catch (Exception)
@@ -149,28 +155,39 @@ namespace Imobiliaria
          return email;
       }
 
-      protected internal static string Cpf(string titulo)
+      protected internal static string Cpf(string titulo, bool edit = false, string import = null)
       {
          long cpf;
          do
          {
             Console.Write(titulo);
             string cpfInput = Console.ReadLine();
-            cpfInput = cpfInput.Length > 11 ? cpfInput[..11] : cpfInput;
-            resultado = Int64.TryParse(cpfInput, out cpf);
-            if (!resultado) Console.WriteLine("**Digite apenas números**");
+            if (edit && cpfInput == "" && import != null)
+            {
+               return Encriptografia.Encrypt(import);
+            }
+            else
+            {
+               cpfInput = cpfInput.Length > 11 ? cpfInput[..11] : cpfInput;
+               resultado = Int64.TryParse(cpfInput, out cpf);
+               if (!resultado) Console.WriteLine("**Digite apenas números**");
+            }
          } while (!resultado);
 
          return Encriptografia.Encrypt(NormalizeCpf(cpf.ToString()));
       }
 
-      protected internal static string Rg()
+      protected internal static string Rg(bool edit = false, string import = null)
       {
          long rg;
          do
          {
             Console.Write("RG (apenas números): ");
             string rgInput = Console.ReadLine();
+            if (edit && rgInput == "" && import != null)
+            {
+               return Encriptografia.Encrypt(import);
+            }
             rgInput = rgInput.Length > 9 ? rgInput[..9] : rgInput;
             resultado = Int64.TryParse(rgInput, out rg);
             if (resultado == false) Console.WriteLine("**Digite apenas números**");
@@ -179,17 +196,37 @@ namespace Imobiliaria
          return Encriptografia.Encrypt(NormalizeRg(rg.ToString()));
       }
 
-      protected internal static string OrgaoUF()
+      protected internal static string OrgaoUF(bool edit = false, string import = null)
       {
          string orgao, uf;
+         string[] imp = import.Split("/");
 
-         Console.Write("Órgão Expedidor: ");
-         orgao = Console.ReadLine();
+         do
+         {
+            Console.Write("Órgão Expedidor: ");
+            orgao = Console.ReadLine();
+
+            if (edit && orgao == "" && import != null)
+            {
+               orgao = imp[0];
+            }
+            else
+            {
+               Console.WriteLine("**Informe o Órgão Expedidor de seu documento**");
+               Console.WriteLine();
+            }
+
+         } while (orgao != "");
 
          do
          {
             Console.Write("UF: ");
             uf = Console.ReadLine().ToUpper();
+
+            if (edit && uf == "" && import != null)
+            {
+               uf = imp[1];
+            }
 
             if (uf.Length != 2)
                Console.WriteLine("**UF Inválido**");
@@ -199,7 +236,7 @@ namespace Imobiliaria
          return orgao + "/" + uf;
       }
 
-      protected internal static string DataNasc()
+      protected internal static string DataNasc(bool edit = false, string import = null)
       {
          DateTime data;
          string linha;
@@ -209,20 +246,25 @@ namespace Imobiliaria
             Console.Write("Digite a data de nascimento (dd/mm/aaaa): ");
             linha = Console.ReadLine();
 
+            if (edit && linha == "" && import != null)
+            {
+               return import;
+            }
+
             resultado = DateTime.TryParse(linha, new CultureInfo("pt-BR"), DateTimeStyles.None, out data);
 
             if (!resultado)
-            {
                Console.WriteLine("**Use o formato correto (dd/mm/aaaa)**");
-            }
 
          } while (!resultado);
 
          return data.ToString("dd/MM/yyyy");
       }
 
-      protected internal static string EstadoCivil()
+      protected internal static string EstadoCivil(bool edit = false, string import = null)
       {
+         int output;
+
          Console.WriteLine("Estado Civil:");
 
          foreach (int i in Enum.GetValues(typeof(EstadoCivil)))
@@ -230,20 +272,35 @@ namespace Imobiliaria
             Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(EstadoCivil), i));
          }
 
-         int output = 0;
+         Console.WriteLine();
 
          do
          {
-            Console.WriteLine();
             Console.Write("Digite o número da opção: ");
-            resultado = int.TryParse(Console.ReadLine(), out output);
+            string inp = Console.ReadLine();
+
+            if (edit && inp == "" && import != null)
+            {
+               return import;
+            }
+
+            resultado = int.TryParse(inp, out output);
+
+            if (!resultado)
+            {
+               Console.WriteLine("**Digite uma opção válida**");
+               Console.WriteLine();
+            }
+
          } while (!resultado);
 
          return Enum.GetName(typeof(EstadoCivil), output);
       }
 
-      protected internal static string FichaRapida()
+      protected internal static string FichaRapida(bool edit = false, string import = null)
       {
+         int output;
+
          Console.WriteLine("Ficha Rapida:");
 
          foreach (int i in Enum.GetValues(typeof(FichaRapida)))
@@ -251,13 +308,25 @@ namespace Imobiliaria
             Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(FichaRapida), i));
          }
 
-         int output = 0;
+         Console.WriteLine();
 
          do
          {
-            Console.WriteLine();
             Console.Write("Digite o número da opção: ");
-            resultado = int.TryParse(Console.ReadLine(), out output);
+            string inp = Console.ReadLine();
+
+            if (edit && inp == "" && import != null)
+            {
+               return import;
+            }
+
+            resultado = int.TryParse(inp, out output);
+
+            if (!resultado)
+            {
+               Console.WriteLine("**Digite uma opção válida**");
+               Console.WriteLine();
+            }
          } while (!resultado);
 
          return Enum.GetName(typeof(FichaRapida), output);

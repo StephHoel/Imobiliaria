@@ -89,12 +89,16 @@ namespace Imobiliaria.Repositorio
       {
          return lista[id];
       }
-      public static Boolean GetLogin(string user, string pass)
+      public static bool GetLogin(string user, string pass)
       {
          foreach (var usu in lista)
          {
-            if (user == usu.RetornaNome() && pass == usu.RetornaSenha())
+            if (user == usu.RetornaNome()
+             && pass == usu.RetornaSenha()
+             && usu.RetornaExcluido() == false)
             {
+               LogRepositorio.Log($"{DateTime.Now}|Login de {usu.RetornaNome()}");
+
                return true;
             }
          }
@@ -130,7 +134,7 @@ namespace Imobiliaria.Repositorio
                break;
             }
          }
-         if(!passAltered)
+         if (!passAltered)
             Console.WriteLine("Usuário e/ou Email Incorreto");
       }
 

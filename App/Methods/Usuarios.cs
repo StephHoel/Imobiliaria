@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using Imobiliaria.Classes;
-using Imobiliaria.DataBase;
 using Imobiliaria.Methods;
+using Imobiliaria.Repositorio;
 
 namespace Imobiliaria
 {

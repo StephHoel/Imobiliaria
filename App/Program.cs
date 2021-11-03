@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Imobiliaria.Classes;
-using Imobiliaria.Methods;
+using Imobiliaria.Repositorio;
 
 namespace Imobiliaria
 {
@@ -11,10 +11,9 @@ namespace Imobiliaria
       static readonly List<Contrato> contrato = ContratoRepositorio.Lista();
       static readonly List<Endereco> endereco = EnderecoRepositorio.Lista();
       static readonly List<Imovel> imovel = ImovelRepositorio.Lista();
-      static readonly List<Telefone> telefone = TelefoneRepositorio.Lista();
-
-      static readonly List<Pessoa> pessoa = PessoaRepositorio.Lista();
       static readonly List<Usuario> usuario = UsuarioRepositorio.Lista();
+      static readonly List<Telefone> telefone = TelefoneRepositorio.Lista();
+      static readonly List<Pessoa> pessoa = PessoaRepositorio.Lista();
 
       static string opcao;
 
@@ -65,7 +64,6 @@ namespace Imobiliaria
 
                      do
                      {
-                        LimparTela();
                         Output.Titulo("Menu Principal");
                         Console.WriteLine("1- Novo Cliente");
                         Console.WriteLine("2- Listar Clientes");
@@ -120,64 +118,20 @@ namespace Imobiliaria
             Console.WriteLine();
          } while (opcao.ToUpper() != "X");
 
-
-
          Console.WriteLine(Environment.NewLine + "Obrigada por utilizar nossos serviços. Até a próxima!");
          Console.WriteLine("Pressione ENTER para sair");
          Console.ReadLine();
       }
-
 
       private static void LimparTela()
       {
          try
          {
             Console.Clear();
-
          }
          catch (IOException)
          {
-
          }
       }
-
-      private static List<Contrato> ColetaContratos()
-      {
-         List<Contrato> contratos = new();
-         string[] readContrato = File.ReadAllLines("./DataBase/contrato.db");
-         if (readContrato.Length != 0)
-         {
-            foreach (string line in readContrato)
-            {
-               string[] l = Output.Split(line);
-
-               Contrato contrato1 = new(int.Parse(l[0]), Encriptografia.Decrypt(l[1]), int.Parse(l[2]), l[3], l[4], double.Parse(l[5]), int.Parse(l[6]), bool.Parse(l[7]), bool.Parse(l[8]));
-               contratos.Add(contrato1);
-            }
-         }
-         return contratos;
-      }
-
-
-
-      private static List<Imovel> ColetaImoveis()
-      {
-         List<Imovel> lista = new();
-         string[] readImovel = File.ReadAllLines("./DataBase/imovel.db");
-         if (readImovel.Length != 0)
-         {
-            foreach (string line in readImovel)
-            {
-               string[] l = Output.Split(line);
-
-               Imovel imovel1 = new(int.Parse(l[0]), Encriptografia.Decrypt(l[1]), l[2], l[3], l[4], int.Parse(l[5]), l[6], l[7], l[8], l[9], l[10], bool.Parse(l[11]));
-               lista.Add(imovel1);
-            }
-         }
-         return lista;
-      }
-
-
-
    }
 }

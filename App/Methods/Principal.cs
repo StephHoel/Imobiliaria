@@ -1,10 +1,8 @@
 using System;
-using System.IO;
-using System.Text;
 
 namespace Imobiliaria
 {
-    public class Principal
+   public class Principal
     {
       protected internal static void InserirSerie()
 		{

@@ -1,5 +1,3 @@
-using System;
-
 namespace Imobiliaria.Classes
 {
    public class Imovel : EnderecoBase

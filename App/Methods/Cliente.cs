@@ -1,18 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Net.Mail;
 using Imobiliaria.Classes;
 using Imobiliaria.Methods;
+using Imobiliaria.Repositorio;
 
 namespace Imobiliaria
 {
    public class Cliente
    {
-      // Variáveis
       static readonly PessoaRepositorio repositorio = new();
 
-      // Funções Disponíveis
       protected internal static void NovoCliente()
       {
          int id = repositorio.ProximoId();
@@ -114,7 +111,7 @@ namespace Imobiliaria
          //Pegar Posição do Cliente escolhido
          foreach (var person in pessoa)
          {
-            if (person.RetornaCpf() == inputCpf && !person.RetornaExcluido())
+            if (person.RetornaCpf() == Encriptografia.Decrypt(inputCpf) && !person.RetornaExcluido())
             {
                id = person.RetornaId();
                cpf = person.RetornaCpf();
@@ -133,7 +130,7 @@ namespace Imobiliaria
             }
          }
 
-         Console.WriteLine(id);
+         // Console.WriteLine(id);
 
          if (id < 0)
          {
@@ -142,67 +139,55 @@ namespace Imobiliaria
          }
          else
          {
-            string temp;
+            string manter = "e para mantê-lo, basta deixar em branco";
 
             //Atualizar CPF
-            Console.WriteLine($"O CPF anterior era {cpf} e para mantê-lo, basta digitar novamente");
-            temp = Encriptografia.Encrypt(Input.Cpf("CPF (apenas números): "));
-            cpf = temp == "" ? cpf : temp;
+            Console.WriteLine($"O CPF anterior era {cpf} {manter}");
+            cpf = Encriptografia.Encrypt(Input.Cpf("CPF (apenas números): ", true, cpf));
 
             //Atualizar Nome
-            Console.WriteLine($"O nome anterior era {nome} e para mantê-lo, basta digitar novamente");
-            temp = Input.PedeString("Nome Completo (sem abreviação): ");
-            nome = temp == "" ? nome : temp;
+            Console.WriteLine($"O nome anterior era {nome} {manter}");
+            nome = Input.PedeString("Nome Completo (sem abreviação): ", true, nome);
 
             //Atualizar RG
-            Console.WriteLine($"O RG anterior era {rg} e para mantê-lo, basta digitar novamente");
-            temp = Encriptografia.Encrypt(Input.Rg());
-            rg = temp == "" ? rg : temp;
+            Console.WriteLine($"O RG anterior era {rg} {manter}");
+            rg = Encriptografia.Encrypt(Input.Rg(true, rg));
 
             //Atualizar Órgão e UF
-            Console.WriteLine($"O Órgão e UF anterior eram {orgaouf} e para mantê-lo, basta digitar novamente");
-            temp = Input.OrgaoUF();
-            orgaouf = temp == "" ? orgaouf : temp;
+            Console.WriteLine($"O Órgão e UF anterior eram {orgaouf} {manter}");
+            orgaouf = Input.OrgaoUF(true, orgaouf);
 
             //Atualizar Data de Nascimento
-            Console.WriteLine($"A data de nascimento anterior era {dataNasc} e para mantê-lo, basta digitar novamente");
-            temp = Input.DataNasc();
-            dataNasc = temp == "" ? dataNasc : temp;
+            Console.WriteLine($"A data de nascimento anterior era {dataNasc} {manter}");
+            dataNasc = Input.DataNasc(true, dataNasc);
 
             //Atualizar Estado Civil
-            Console.WriteLine($"O estado civil anterior era {estadoCivil} e para mantê-lo, basta digitar novamente");
-            temp = Input.EstadoCivil();
-            estadoCivil = temp == "" ? estadoCivil : temp;
+            Console.WriteLine($"O estado civil anterior era {estadoCivil} {manter}");
+            estadoCivil = Input.EstadoCivil(true, estadoCivil);
 
             //Atualizar Naturalidade
-            Console.WriteLine($"A naturalidade anterior era {naturalidade} e para mantê-lo, basta digitar novamente");
-            temp = Input.PedeString("Naturalidade: ");
-            naturalidade = temp == "" ? naturalidade : temp;
+            Console.WriteLine($"A naturalidade anterior era {naturalidade} {manter}");
+            naturalidade = Input.PedeString("Naturalidade: ", true, naturalidade);
 
             //Atualizar Nacionalidade
-            Console.WriteLine($"A nacionalidade anterior era {nacionalidade} e para mantê-lo, basta digitar novamente");
-            temp = Input.PedeString("Nacionalidade: ");
-            nacionalidade = temp == "" ? nacionalidade : temp;
+            Console.WriteLine($"A nacionalidade anterior era {nacionalidade} {manter}");
+            nacionalidade = Input.PedeString("Nacionalidade: ", true, nacionalidade);
 
             //Atualizar Pai
-            Console.WriteLine($"O nome do pai anterior era {pai} e para mantê-lo, basta digitar novamente");
-            temp = Input.PedeString("Nome do Pai: ");
-            pai = temp == "" ? pai : temp;
+            Console.WriteLine($"O nome do pai anterior era {pai} {manter}");
+            pai = Input.PedeString("Nome do Pai: ", true, pai);
 
             //Atualizar Mãe
-            Console.WriteLine($"O nome da mãe anterior era {mae} e para mantê-lo, basta digitar novamente");
-            temp = Input.PedeString("Nome da Mãe: ");
-            mae = temp == "" ? mae : temp;
+            Console.WriteLine($"O nome da mãe anterior era {mae} {manter}");
+            mae = Input.PedeString("Nome da Mãe: ", true, mae);
 
             //Atualizar E-mail
-            Console.WriteLine($"O e-mail anterior era {email} e para mantê-lo, basta digitar novamente");
-            temp = Input.Email();
-            email = temp == "" ? email : temp;
+            Console.WriteLine($"O e-mail anterior era {email} {manter}");
+            email = Input.Email(true, email);
 
             //Atualizar Ficha Rápida
-            Console.WriteLine($"A situação da ficha rápida anterior era {fichaRapida} e para mantê-lo, basta digitar novamente");
-            temp = Input.FichaRapida();
-            fichaRapida = temp == "" ? fichaRapida : temp;
+            Console.WriteLine($"A situação da ficha rápida anterior era {fichaRapida} {manter}");
+            fichaRapida = Input.FichaRapida(true, fichaRapida);
 
             //Telefone(s) do Cliente
             // Telefones.AtualizaTelefone(cpf, id);
@@ -212,7 +197,7 @@ namespace Imobiliaria
 
             Pessoa cliente = new(id, cpf, nome, rg, orgaouf, dataNasc, naturalidade, nacionalidade, pai, mae, estadoCivil, fichaRapida, email);
 
-            repositorio.Atualiza(id, cliente, pessoa);
+            repositorio.Atualiza(id, cliente);
          }
 
 

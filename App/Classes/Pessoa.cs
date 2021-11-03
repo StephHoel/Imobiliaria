@@ -1,8 +1,6 @@
-using System;
-
 namespace Imobiliaria.Classes
 {
-    public class Pessoa
+   public class Pessoa
     {
         private int Id { get; set; }
         private string Cpf { get; set; }
@@ -35,9 +33,7 @@ namespace Imobiliaria.Classes
             this.FichaRapida = fichaRapida;
             this.Email = email;
             this.Excluido = excluido;
-
         }
-
 
         public int RetornaId()
         {
@@ -45,12 +41,7 @@ namespace Imobiliaria.Classes
         }
         public string RetornaCpf()
         {
-            string cpf = this.Cpf;
-            string novo = cpf[..3] + ".";
-                   novo += cpf.Substring(3, 3) + ".";
-                   novo += cpf.Substring(6, 3) + "-";
-                   novo += cpf.Substring(9, 2);
-            return novo;
+            return this.Cpf;
         }
         public string RetornaNome()
         {
@@ -58,12 +49,7 @@ namespace Imobiliaria.Classes
         }
         public string RetornaRg()
         {
-            string rg = this.Rg;
-            string novo = rg[..2] + ".";
-            novo += rg.Substring(2, 3) + ".";
-            novo += rg.Substring(5, 3) + "-";
-            novo += rg.Substring(8, 1);
-            return novo;
+            return this.Rg;
         }
         public string RetornaOrgaoUF()
         {

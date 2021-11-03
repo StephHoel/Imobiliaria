@@ -1,8 +1,6 @@
-using System;
-
 namespace Imobiliaria.Classes
 {
-    public class Contrato
+   public class Contrato
     {
       private int IdContrato { get; set; }
       private string CpfLocatario { get; set; }
@@ -29,7 +27,7 @@ namespace Imobiliaria.Classes
          this.Excluido = excluido;
 
       }
-      
+
       public int RetornaId()
       {
          return this.IdContrato;
