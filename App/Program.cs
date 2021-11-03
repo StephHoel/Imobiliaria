@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Imobiliaria.Classes;
-using Imobiliaria.Repositorio;
+using App.Methods;
+using Lib.Classes;
+using Lib.Repositorio;
 
 namespace Imobiliaria
 {

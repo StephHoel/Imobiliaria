@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
-using Imobiliaria.Methods;
+using Lib.Enums;
 
-namespace Imobiliaria
+namespace App.Methods
 {
    public class Input
    {

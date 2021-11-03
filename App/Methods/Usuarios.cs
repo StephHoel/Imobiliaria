@@ -1,9 +1,8 @@
 using System;
-using Imobiliaria.Classes;
-using Imobiliaria.Methods;
-using Imobiliaria.Repositorio;
+using Lib.Classes;
+using Lib.Repositorio;
 
-namespace Imobiliaria
+namespace App.Methods
 {
    public class Usuarios
    {

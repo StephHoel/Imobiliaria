@@ -3,11 +3,10 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Imobiliaria.Methods
+namespace App.Methods
 {
    public class Encriptografia
    {
-
       readonly private static string publickey = "12345678";
       readonly private static string secretkey = "87654321";
 
@@ -65,7 +64,6 @@ namespace Imobiliaria.Methods
          }
       }
 
-
       public static string Password()
       {
          string senha = "";
@@ -94,16 +92,5 @@ namespace Imobiliaria.Methods
          } while (true);
          return Encrypt(senha);
       }
-
-      // static void Main()
-      // {
-      //     string encrypted = Encrypt("WaterWorld");
-      //     Console.WriteLine("Encriptografado: " + encrypted);
-
-      //     Console.WriteLine();
-
-      //     string decrypted = Decrypt(encrypted);
-      //     Console.WriteLine("Descriptografado: " + decrypted);
-      // }
    }
 }
