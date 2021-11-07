@@ -1,21 +1,23 @@
 using System;
 
-namespace App.Methods
+namespace Lib.Methods
 {
    public class Output
    {
-      public static void MenuLogin()
+      public static void Titulo(string titulo)
       {
-         Console.WriteLine("1- Novo Usuário");
-         Console.WriteLine("2- Login");
-         Console.WriteLine("3- Esqueci a Senha");
-         Console.WriteLine("X- Sair");
          Console.WriteLine();
+         Console.WriteLine($"**{titulo}**");
+      }
+
+      public static string[] Split(string s)
+      {
+         return s.Split('|');
       }
 
       public static void MenuPrincipal()
       {
-         Console.WriteLine("**Menu Principal**");
+         Titulo("Menu Principal");
          Console.WriteLine("1- Novo Cliente");
          Console.WriteLine("2- Listar Clientes");
          Console.WriteLine("3- Editar Cliente");
@@ -23,11 +25,11 @@ namespace App.Methods
          Console.WriteLine("5- Listar Contratos");
          Console.WriteLine("6- Editar Contrato");
          Console.WriteLine("X- Sair");
-         Console.WriteLine();
       }
 
       public static string RetornoMenu()
       {
+         Console.WriteLine();
          Console.Write("Informe a opção desejada: ");
          string opcao = Console.ReadLine().ToUpper();
          Console.WriteLine();

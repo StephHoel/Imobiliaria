@@ -9,7 +9,7 @@ namespace Lib.Repositorio
 {
    public class EnderecoRepositorio : IRepositorio<Endereco>
    {
-      readonly static string path = "Databases/endereco.db";
+      readonly static string path = "../Lib/Databases/endereco.db";
       private static readonly List<Endereco> lista = new();
       public void Atualiza(int id, Endereco objeto)
       {

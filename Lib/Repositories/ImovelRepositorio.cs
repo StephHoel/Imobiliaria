@@ -9,7 +9,7 @@ namespace Lib.Repositorio
 {
    public class ImovelRepositorio : IRepositorio<Imovel>
    {
-      readonly static string path = "Databases/imovel.db";
+      readonly static string path = "../Lib/Databases/imovel.db";
       private static readonly List<Imovel> lista = new();
       public void Atualiza(int id, Imovel objeto)
       {

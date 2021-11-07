@@ -9,7 +9,7 @@ namespace Lib.Repositorio
 {
    public class ContratoRepositorio : IRepositorio<Contrato>
    {
-      readonly static string path = "Databases/contrato.db";
+      readonly static string path = "../Lib/Databases/contrato.db";
       private static readonly List<Contrato> lista = new();
       public void Atualiza(int id, Contrato objeto)
       {

@@ -9,7 +9,7 @@ namespace Lib.Repositorio
 {
    public class UsuarioRepositorio : IRepositorio<Usuario>
    {
-      static readonly string path = "Databases/usuario.db";
+      static readonly string path = "../Lib/Databases/usuario.db";
       private static readonly List<Usuario> lista = new();
 
       private static void Carrega()
@@ -112,8 +112,8 @@ namespace Lib.Repositorio
             if (user == usu.RetornaNome() && email == usu.RetornaEmail())
             {
                // informar nova senha
-               Console.Write("Nova Senha: ");
-               var pass = Encriptografia.Password();
+               // Console.Write("Nova Senha: ");
+               var pass = Input.Senha("Nova Senha");
 
                Usuario u = new(usu.RetornaId(), usu.RetornaNome(), usu.RetornaEmail(), pass, usu.RetornaExcluido());
 

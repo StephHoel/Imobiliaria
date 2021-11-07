@@ -4,7 +4,7 @@ namespace Lib.Repositorio
 {
    public class LogRepositorio
    {
-      static readonly string path = "Databases/log.db";
+      static readonly string path = "../Lib/Databases/log.db";
 
       public static void Log(string log)
       {

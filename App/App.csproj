@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
-	  <ProjectReference Include="..\Lib\Imobiliaria.Lib.csproj" />
+	  <ProjectReference Include="..\Lib\Lib.csproj" />
 	</ItemGroup>
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>

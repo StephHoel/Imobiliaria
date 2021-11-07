@@ -9,8 +9,8 @@ namespace Lib.Repositorio
 {
    public class PessoaRepositorio : IRepositorio<Pessoa>
    {
-      static readonly string path = "Databases/pessoa.db";
-      private static readonly List<Pessoa> lista = new();
+      static readonly string path = "../Lib/Databases/pessoa.db";
+      static readonly List<Pessoa> lista = new();
 
       public void Atualiza(int id, Pessoa objeto)
       {

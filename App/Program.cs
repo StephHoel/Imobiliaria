@@ -29,21 +29,16 @@ namespace Imobiliaria
 
          do
          {
-            Console.WriteLine("1- Novo Usuário");
-            Console.WriteLine("2- Login");
-            Console.WriteLine("3- Esqueci a Senha");
-            Console.WriteLine("X- Sair");
-            Console.WriteLine();
-            Console.Write("Informe a opção: ");
-            opcao = Console.ReadLine();
+            Output.MenuLogin();
+            opcao = Output.RetornoMenu();
 
             switch (opcao)
             {
                case "1":
-                  Usuarios.NovoUsuario();
+                  EntradaUsuario.NovoUsuario();
                   break;
                case "2":
-                  user = Usuarios.Login();
+                  user = EntradaUsuario.Login();
                   if (user != "")
                   {
                      /* TODO - Menu com:
@@ -65,27 +60,19 @@ namespace Imobiliaria
 
                      do
                      {
-                        Output.Titulo("Menu Principal");
-                        Console.WriteLine("1- Novo Cliente");
-                        Console.WriteLine("2- Listar Clientes");
-                        Console.WriteLine("3- Editar Cliente");
-                        Console.WriteLine("4- Novo Contrato");
-                        Console.WriteLine("5- Listar Contratos");
-                        Console.WriteLine("6- Editar Contrato");
-                        Console.WriteLine("X- Sair");
-
+                        Output.MenuPrincipal();
                         opcao = Output.RetornoMenu();
 
                         switch (opcao)
                         {
                            case "1": // Novo Cliente
-                              Cliente.NovoCliente();
+                              EntradaCliente.NovoCliente();
                               break;
                            case "2": // Listar Clientes
-                              Cliente.ListarCliente(pessoa, telefone);
+                              EntradaCliente.ListarCliente(pessoa, telefone);
                               break;
                            case "3": // Editar Cliente
-                              Cliente.AtualizarCliente(pessoa);
+                              // EntradaCliente.AtualizarCliente(pessoa);
                               break;
                            case "4": // Novo Contrato
                               Principal.InserirSerie();
@@ -99,8 +86,7 @@ namespace Imobiliaria
                            case "X":
                               break;
                            default:
-                              // throw new ArgumentOutOfRangeException();
-                              Console.WriteLine("Opção Inválida");
+                              Console.WriteLine("**Opção Inválida**");
                               break;
                         }
 
@@ -108,7 +94,7 @@ namespace Imobiliaria
                   }
                   break;
                case "3":
-                  Usuarios.EsqueciSenha();
+                  EntradaUsuario.EsqueciSenha();
                   break;
                case "X":
                   break;
@@ -119,7 +105,8 @@ namespace Imobiliaria
             Console.WriteLine();
          } while (opcao.ToUpper() != "X");
 
-         Console.WriteLine(Environment.NewLine + "Obrigada por utilizar nossos serviços. Até a próxima!");
+         Console.WriteLine();
+         Console.WriteLine("Obrigada por utilizar nossos serviços. Até a próxima!");
          Console.WriteLine("Pressione ENTER para sair");
          Console.ReadLine();
       }

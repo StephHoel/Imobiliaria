@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using Lib.Enums;
 
-namespace App.Methods
+namespace Lib.Methods
 {
    public class Input
    {
@@ -350,10 +350,39 @@ namespace App.Methods
          return novo;
       }
 
-      protected internal static string Senha()
+      protected internal static string Senha(string titulo = "Senha")
       {
-         Console.Write("Senha: ");
-         return Encriptografia.Password();
+         Console.Write($"{titulo}: ");
+         return Password();
+      }
+
+      private static string Password()
+      {
+         string senha = "";
+         do
+         {
+            ConsoleKeyInfo key = Console.ReadKey(true);
+            // Backspace Should Not Work
+            if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+            {
+               senha += key.KeyChar;
+               Console.Write("*");
+            }
+            else
+            {
+               if (key.Key == ConsoleKey.Backspace && senha.Length > 0)
+               {
+                  senha = senha[0..^1];
+                  Console.Write("\b \b");
+               }
+               else if (key.Key == ConsoleKey.Enter)
+               {
+                  Console.WriteLine();
+                  break;
+               }
+            }
+         } while (true);
+         return Encriptografia.Encrypt(senha);
       }
    }
 }
