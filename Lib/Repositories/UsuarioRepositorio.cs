@@ -90,6 +90,7 @@ namespace Lib.Repositorio
       }
       public static bool GetLogin(string user, string pass)
       {
+         Carrega();
          foreach (var usu in lista)
          {
             if (user == usu.RetornaNome()
@@ -113,12 +114,12 @@ namespace Lib.Repositorio
             {
                // informar nova senha
                // Console.Write("Nova Senha: ");
-               var pass = Input.Senha("Nova Senha");
+               // var pass = Input.Senha("Nova Senha");
 
-               Usuario u = new(usu.RetornaId(), usu.RetornaNome(), usu.RetornaEmail(), pass, usu.RetornaExcluido());
+               // Usuario u = new(usu.RetornaId(), usu.RetornaNome(), usu.RetornaEmail(), pass, usu.RetornaExcluido());
 
                // atualizar lista e banco
-               lista[usu.RetornaId() - 1] = u;
+               // lista[usu.RetornaId() - 1] = u;
 
                string[] list = new string[lista.Count];
                foreach (var usuario1 in lista)

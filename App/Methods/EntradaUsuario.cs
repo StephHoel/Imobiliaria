@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Lib.Classes;
 using Lib.Methods;
 using Lib.Repositorio;
@@ -9,7 +10,35 @@ namespace App.Methods
    {
       static readonly UsuarioRepositorio repositorio = new();
 
-      protected internal static void NovoUsuario()
+      public static void Atualizar(List<Lib.Classes.Usuario> list)
+      {
+
+      }
+      public static void Excluir(List<Lib.Classes.Usuario> list)
+      {
+
+      }
+      public static void Listar(List<Lib.Classes.Usuario> objeto)
+      {
+         Console.WriteLine("=====================");
+         Console.WriteLine("**Listando Usuários**");
+         Console.WriteLine("=====================");
+
+         Output.Vazio(objeto.Count);
+         foreach (var i in objeto)
+         {
+            if (!i.RetornaExcluido())
+            {
+               Console.WriteLine();
+               Console.WriteLine($"Usuário: {i.RetornaNome()}");
+            }
+         }
+         Console.WriteLine();
+         Console.WriteLine("=====================");
+         Console.WriteLine();
+      }
+
+      protected internal static void Novo()
       {
          int id = repositorio.ProximoId();
 
@@ -92,18 +121,8 @@ namespace App.Methods
 
       protected internal static string Login()
       {
-         Console.WriteLine();
-
          // Usuário
-         string usuario;
-         do
-         {
-            Console.Write("Usuário: ");
-            usuario = Geral.RetornaString(Console.ReadLine());
-
-            if (usuario == "")
-               Console.WriteLine("**Campo vazio inválido**");
-         } while (usuario == "");
+         string usuario = Output.DoWhile("Usuário: ", "Add texto");
 
          // Senha
          string senha;
@@ -119,7 +138,6 @@ namespace App.Methods
          if (UsuarioRepositorio.GetLogin(usuario, senha))
             return usuario;
 
-
          Console.WriteLine("**Usuário e/ou Senha Incorreto(s)**");
          return "";
       }
@@ -128,27 +146,11 @@ namespace App.Methods
       {
          Console.WriteLine();
 
-         // Nome
-         string usuario;
-         do
-         {
-            Console.Write("Usuário: ");
-            usuario = Geral.RetornaString(Console.ReadLine());
-
-            if (usuario == "")
-               Console.WriteLine("**Campo vazio inválido**");
-         } while (usuario == "");
+         // Usuário
+         string usuario = Output.DoWhile("Usuário: ", "Add texto");
 
          // Email
-         string email;
-         do
-         {
-            Console.Write("E-mail (ex@exemp.lo): ");
-            email = Geral.Email(Console.ReadLine());
-
-            if (email == "")
-               Console.WriteLine("**Digite corretamente o e-mail**");
-         } while (email == "");
+         string email = Output.DoWhile("E-mail (ex@exemp.lo): ", "Add email");
 
 
          UsuarioRepositorio.LostPass(usuario, email);

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Lib.Classes;
 using Lib.Enums;
 using Lib.Methods;
@@ -9,7 +10,52 @@ namespace App.Methods
    public class EntradaImovel
    {
       static readonly ImovelRepositorio repositorio = new();
-      protected internal static void NovoImovel(string cpfProprietario)
+
+      public static void Atualizar(List<Lib.Classes.Imovel> list)
+      {
+
+      }
+      public static void Excluir(List<Lib.Classes.Imovel> list)
+      {
+
+      }
+      public static void Listar(List<Lib.Classes.Imovel> objeto)
+      {
+         Console.WriteLine("=====================");
+         Console.WriteLine("**Listando Imóveis**");
+         Console.WriteLine("=====================");
+
+         Output.Vazio(objeto.Count);
+         
+         foreach (var i in objeto)
+         {
+            if (!i.RetornaExcluido())
+            {
+               string s1, s2;
+
+               Console.WriteLine();
+
+               s1 = i.RetornaLogradouro() + ", " + i.RetornaNumero();
+
+               if (i.RetornaComplemento() != "")
+                  s1 += " - " + i.RetornaComplemento();
+
+               s2 = i.RetornaBairro() + " - " + i.RetornaCidade() + "/" + i.RetornaEstado();
+
+
+               Console.WriteLine($"ID: {i.RetornaId()}");
+               Console.WriteLine(s1);
+               Console.WriteLine(s2);
+               Console.WriteLine($"{i.RetornaCep()}");
+
+            }
+         }
+         Console.WriteLine();
+         Console.WriteLine("=====================");
+         Console.WriteLine();
+      }
+
+      protected internal static void Novo(string cpfProprietario)
       {
          int id = repositorio.ProximoId();
 
@@ -120,5 +166,7 @@ namespace App.Methods
 
          repositorio.Insere(imovel, imovel2);
       }
+
+
    }
 }

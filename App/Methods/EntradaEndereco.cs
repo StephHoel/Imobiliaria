@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Lib.Classes;
 using Lib.Enums;
 using Lib.Methods;
@@ -9,7 +10,17 @@ namespace App.Methods
    public class EntradaEndereco
    {
       static readonly EnderecoRepositorio repositorio = new();
-      protected internal static void NovoEndereco(string cpf)
+
+      public static void Atualizar(List<Lib.Classes.Endereco> list)
+      {
+
+      }
+      public static void Excluir(List<Lib.Classes.Endereco> list)
+      {
+
+      }
+
+      public static void Novo(string cpf)
       {
          int id = repositorio.ProximoId();
 

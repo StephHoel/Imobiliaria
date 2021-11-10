@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Lib.Classes;
 using Lib.Enums;
 using Lib.Methods;
@@ -11,7 +12,7 @@ namespace App.Methods
    {
       static readonly PessoaRepositorio repositorio = new();
 
-      protected internal static void NovoCliente()
+      protected internal static void Novo()
       {
          int id = repositorio.ProximoId();
 
@@ -20,163 +21,54 @@ namespace App.Methods
          // Informação Básica do Cliente
 
          // CPF
-         string cpf;
-         do
-         {
-            Console.Write("CPF (apenas números): ");
-            cpf = MCliente.Cpf(Console.ReadLine());
-
-            if (cpf == "")
-               Console.WriteLine("**Digite apenas números**");
-         } while (cpf == "");
+         string cpf = Output.DoWhile("CPF (apenas números): ", "Add cpf");
 
          // NOME
-         string nome;
-         do
-         {
-            Console.Write("Nome Completo (sem abreviação): ");
-            nome = Geral.RetornaString(Console.ReadLine());
-
-            if (nome == "")
-               Console.WriteLine("**Campo vazio inválido**");
-         } while (nome == "");
+         string nome = Output.DoWhile("Nome Completo (sem abreviação): ", "Add texto");
 
          // RG
-         string rg;
-         do
-         {
-            Console.Write("RG (apenas números): ");
-            rg = MCliente.Rg(Console.ReadLine());
-
-            if (rg == "")
-               Console.WriteLine("**Digite apenas números**");
-         } while (rg == "");
+         string rg = Output.DoWhile("RG (apenas números): ", "Add rg");
 
          // Órgão e UF
-         string orgaouf, orgao, uf;
-         do
-         {
-            Console.Write("Órgão Expedidor: ");
-            orgao = Geral.RetornaString(Console.ReadLine());
+         string orgaouf = Output.DoWhile("Órgão Expedidor: ", "Add texto");
 
-            if (orgao == "")
-               Console.WriteLine("**Campo vazio inválido**");
-         } while (orgao == "");
-
-         orgaouf = orgao + "/";
+         orgaouf += "/";
 
          Console.WriteLine("Estado (UF)");
          foreach (int i in Enum.GetValues(typeof(EstadosUF)))
             Console.WriteLine(Enum.GetName(typeof(EstadosUF), i));
 
-         do
-         {
-            Console.Write("UF: ");
-            uf = Geral.Uf(Console.ReadLine());
-
-            if (uf == "")
-               Console.WriteLine("**UF Inválido**");
-         } while (uf == "");
-
-         orgaouf += uf;
+         orgaouf += Output.DoWhile("UF: ", "Add uf");
 
          //Data de Nascimento
-         string dataNasc;
-         do
-         {
-            Console.Write("Digite a data de nascimento (dd/mm/aaaa): ");
-            dataNasc = MCliente.DataNasc(Console.ReadLine());
-
-            if (dataNasc == "")
-               Console.WriteLine("**Use o formato correto (dd/mm/aaaa)**");
-         } while (dataNasc == "");
+         string dataNasc = Output.DoWhile("Digite a data de nascimento (dd/mm/aaaa): ", "Add data");
 
          // Estado Civil
-         string estadoCivil;
          Console.WriteLine("Estado Civil:");
          foreach (int i in Enum.GetValues(typeof(EstadoCivil)))
-         {
             Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(EstadoCivil), i));
-         }
-         do
-         {
-            Console.Write("Digite o número da opção: ");
-            estadoCivil = Geral.Enums(Console.ReadLine(), "Estado Civil");
-
-            if (estadoCivil == "")
-               Console.WriteLine("**Digite uma opção válida**");
-         } while (estadoCivil == "");
+         string estadoCivil = Output.DoWhile("Digite o número da opção: ", "Add opção", "Estado Civil");
 
          // Naturalidade
-         string nat;
-         do
-         {
-            Console.Write("Naturalidade: ");
-            nat = Geral.RetornaString(Console.ReadLine());
-
-            if (nat == "")
-               Console.WriteLine("**Campo vazio inválido**");
-         } while (nat == "");
+         string nat = Output.DoWhile("Naturalidade: ", "Add texto");
 
          // Nacionalidade
-         string nac;
-         do
-         {
-            Console.Write("Nacionalidade: ");
-            nac = Geral.RetornaString(Console.ReadLine());
-
-            if (nac == "")
-               Console.WriteLine("**Campo vazio inválido**");
-         } while (nac == "");
+         string nac = Output.DoWhile("Nacionalidade: ", "Add texto");
 
          // Pai
-         string pai;
-         do
-         {
-            Console.Write("Nome do Pai: ");
-            pai = Geral.RetornaString(Console.ReadLine());
-
-            if (pai == "")
-               Console.WriteLine("**Campo vazio inválido**");
-         } while (pai == "");
+         string pai = Output.DoWhile("Nome do Pai: ", "Add texto");
 
          // Mãe
-         string mae;
-         do
-         {
-            Console.Write("Nome do Mãe: ");
-            mae = Geral.RetornaString(Console.ReadLine());
-
-            if (mae == "")
-               Console.WriteLine("**Campo vazio inválido**");
-         } while (mae == "");
+         string mae = Output.DoWhile("Nome do Mãe: ", "Add texto");
 
          // Email
-         string email;
-         do
-         {
-            Console.Write("E-mail (ex@exemp.lo): ");
-            email = Geral.Email(Console.ReadLine());
-
-            if (email == "")
-               Console.WriteLine("**Digite corretamente o e-mail**");
-         } while (email == "");
+         string email = Output.DoWhile("E-mail (ex@exemp.lo): ", "Add email");
 
          // Ficha Rápida
-         string fichaRapida;
          Console.WriteLine("Ficha Rápida:");
          foreach (int i in Enum.GetValues(typeof(FichaRapida)))
-         {
             Console.WriteLine("{0}- {1}", i, Enum.GetName(typeof(FichaRapida), i));
-         }
-         do
-         {
-            Console.Write("Digite o número da opção: ");
-            fichaRapida = Geral.Enums(Console.ReadLine(), "Ficha Rápida");
-
-            if (fichaRapida == "")
-               Console.WriteLine("**Digite uma opção válida**");
-         } while (fichaRapida == "");
+         string fichaRapida = Output.DoWhile("Digite o número da opção: ", "Add opção", "Ficha Rápida");
 
          // Criando objeto
          Pessoa cliente = new(id, cpf, nome, rg, orgaouf, dataNasc, nat, nac, pai, mae, estadoCivil, fichaRapida, email);
@@ -188,17 +80,20 @@ namespace App.Methods
          repositorio.Insere(cliente, cliente2);
 
          // Adicionando Telefone(s) do Cliente
-         EntradaTelefone.NovoTelefone(cpf);
+         EntradaTelefone.Novo(cpf);
 
          // Adicionando Endereço do Cliente
-         EntradaEndereco.NovoEndereco(cpf);
+         EntradaEndereco.Novo(cpf);
       }
 
-      protected internal static void ListarCliente(List<Lib.Classes.Pessoa> objeto, List<Lib.Classes.Telefone> telefone)
+      protected internal static void Listar(List<Lib.Classes.Pessoa> objeto, List<Lib.Classes.Telefone> telefone)
       {
          Console.WriteLine("=====================");
          Console.WriteLine("**Listando Clientes**");
          Console.WriteLine("=====================");
+
+         Output.Vazio(objeto.Count);
+
          foreach (var person in objeto)
          {
             if (!person.RetornaExcluido())
@@ -214,118 +109,142 @@ namespace App.Methods
                      Console.Write(tel.RetornaWhatsapp() ? " / Whatsapp" : "");
                   }
                }
+                     Console.WriteLine();
             }
          }
          Console.WriteLine();
-         Console.WriteLine();
          Console.WriteLine("=====================");
+         Console.WriteLine();
       }
 
+      protected internal static void Atualizar(List<Lib.Classes.Pessoa> pessoa)
+      {
+         Console.WriteLine("**Atualizando Cliente**");
+         string manter = "e para mantê-lo, deixe como está e pressione ENTER";
 
-      /*
-            protected internal static void AtualizarCliente(List<Lib.Classes.Pessoa> pessoa)
+         //Pergunta qual cliente será editado
+         string cpf = Output.DoWhile("Insira o CPF do cliente (apenas números): ", "Add cpf");
+
+         int id = -1;
+         string nome = "", rg = "", orgaouf = "", dataNasc = "", estadoCivil = "", nat = "", nac = "", pai = "", mae = "", email = "", fichaRapida = "";
+
+         //Pegar Posição do Cliente escolhido
+         foreach (var person in pessoa)
+         {
+            if (person.RetornaCpf() == Encriptografia.Decrypt(cpf) && !person.RetornaExcluido())
             {
-               Output.Titulo("Atualizando Cliente");
-
-               //Pergunta qual cliente será editado
-               string inputCpf = InputCliente.Cpf("Insira o CPF do cliente (apenas números): ");
-               int id = -1;
-               string cpf = "", nome = "", rg = "", orgaouf = "", dataNasc = "", estadoCivil = "", naturalidade = "", nacionalidade = "", pai = "", mae = "", email = "", fichaRapida = "";
-
-               //Pegar Posição do Cliente escolhido
-               foreach (var person in pessoa)
-               {
-                  if (person.RetornaCpf() == Encriptografia.Decrypt(inputCpf) && !person.RetornaExcluido())
-                  {
-                     id = person.RetornaId();
-                     cpf = person.RetornaCpf();
-                     nome = person.RetornaNome();
-                     rg = person.RetornaRg();
-                     orgaouf = person.RetornaOrgaoUF();
-                     dataNasc = person.RetornaDataNasc();
-                     estadoCivil = person.RetornaEstadoCivil();
-                     naturalidade = person.RetornaNaturalidade();
-                     nacionalidade = person.RetornaNacionalidade();
-                     pai = person.RetornaPai();
-                     mae = person.RetornaMae();
-                     email = person.RetornaEmail();
-                     fichaRapida = person.RetornaFichaRapida();
-                     break;
-                  }
-               }
-
-               // Console.WriteLine(id);
-
-               if (id < 0)
-               {
-                  Console.WriteLine("Erro no sistema, reinicie a aplicação");
-                  Console.ReadLine();
-               }
-               else
-               {
-                  string manter = "e para mantê-lo, basta deixar em branco";
-
-                  //Atualizar CPF
-                  Console.WriteLine($"O CPF anterior era {cpf} {manter}");
-                  cpf = Encriptografia.Encrypt(InputCliente.Cpf("CPF (apenas números): ", true, cpf));
-
-                  //Atualizar Nome
-                  Console.WriteLine($"O nome anterior era {nome} {manter}");
-                  nome = InputComum.PedeString("Nome Completo (sem abreviação): ", true, nome);
-
-                  //Atualizar RG
-                  Console.WriteLine($"O RG anterior era {rg} {manter}");
-                  rg = Encriptografia.Encrypt(InputCliente.Rg(true, rg));
-
-                  //Atualizar Órgão e UF
-                  Console.WriteLine($"O Órgão e UF anterior eram {orgaouf} {manter}");
-                  orgaouf = InputCliente.OrgaoUF(true, orgaouf);
-
-                  //Atualizar Data de Nascimento
-                  Console.WriteLine($"A data de nascimento anterior era {dataNasc} {manter}");
-                  dataNasc = InputCliente.DataNasc(true, dataNasc);
-
-                  //Atualizar Estado Civil
-                  Console.WriteLine($"O estado civil anterior era {estadoCivil} {manter}");
-                  estadoCivil = InputCliente.EstadoCivil(true, estadoCivil);
-
-                  //Atualizar Naturalidade
-                  Console.WriteLine($"A naturalidade anterior era {naturalidade} {manter}");
-                  naturalidade = InputComum.PedeString("Naturalidade: ", true, naturalidade);
-
-                  //Atualizar Nacionalidade
-                  Console.WriteLine($"A nacionalidade anterior era {nacionalidade} {manter}");
-                  nacionalidade = InputComum.PedeString("Nacionalidade: ", true, nacionalidade);
-
-                  //Atualizar Pai
-                  Console.WriteLine($"O nome do pai anterior era {pai} {manter}");
-                  pai = InputComum.PedeString("Nome do Pai: ", true, pai);
-
-                  //Atualizar Mãe
-                  Console.WriteLine($"O nome da mãe anterior era {mae} {manter}");
-                  mae = InputComum.PedeString("Nome da Mãe: ", true, mae);
-
-                  //Atualizar E-mail
-                  Console.WriteLine($"O e-mail anterior era {email} {manter}");
-                  email = InputComum.Email(true, email);
-
-                  //Atualizar Ficha Rápida
-                  Console.WriteLine($"A situação da ficha rápida anterior era {fichaRapida} {manter}");
-                  fichaRapida = InputCliente.FichaRapida(true, fichaRapida);
-
-                  //Telefone(s) do Cliente
-                  // Telefones.AtualizaTelefone(cpf, id);
-
-                  //Endereço
-                  // Enderecos.AtualizaEndereco(cpf);
-
-                  Pessoa cliente = new(id, cpf, nome, rg, orgaouf, dataNasc, naturalidade, nacionalidade, pai, mae, estadoCivil, fichaRapida, email);
-
-                  repositorio.Atualiza(id, cliente);
-               }
-
-
+               id = person.RetornaId();
+               cpf = person.RetornaCpf();
+               nome = person.RetornaNome();
+               rg = person.RetornaRg();
+               orgaouf = person.RetornaOrgaoUF();
+               dataNasc = person.RetornaDataNasc();
+               estadoCivil = person.RetornaEstadoCivil();
+               nat = person.RetornaNaturalidade();
+               nac = person.RetornaNacionalidade();
+               pai = person.RetornaPai();
+               mae = person.RetornaMae();
+               email = person.RetornaEmail();
+               fichaRapida = person.RetornaFichaRapida();
+               break;
             }
-       */
+
+            if (id == -1)
+               Console.WriteLine("CPF não encontrado");
+         }
+
+         // Espaço
+         Console.WriteLine();
+
+         // Atualizar CPF
+         Console.WriteLine($"O CPF anterior era \"{cpf}\" {manter}");
+         cpf = Output.DoWhile("CPF (apenas números): ", "Editar cpf", cpf);
+
+         // Atualizar Nome
+         Console.WriteLine($"O nome anterior era \"{nome}\" {manter}");
+         nome = Output.DoWhile("Nome Completo (sem abreviação): ", "Editar texto", nome);
+
+         // Atualizar RG
+         Console.WriteLine($"O RG anterior era {rg} {manter}");
+         rg = Output.DoWhile("RG (apenas números): ", "Editar rg", rg);
+
+         // Atualizar Órgão e UF
+         string orgao = orgaouf.Split('/')[0];
+         string uf = orgaouf.Split('/')[1];
+
+
+         Console.WriteLine($"O Órgão e UF anterior eram {orgaouf} {manter}");
+         orgaouf = Output.DoWhile("Órgão Expedidor: ", "Editar texto", orgao);
+
+         orgaouf += "/";
+
+         Console.WriteLine("Estado (UF)");
+         foreach (int i in Enum.GetValues(typeof(EstadosUF)))
+            Console.WriteLine(Enum.GetName(typeof(EstadosUF), i));
+
+         orgaouf += Output.DoWhile("UF: ", "Editar uf", uf);
+
+         // Atualizar Data de Nascimento
+         Console.WriteLine($"A data de nascimento anterior era {dataNasc} {manter}");
+         dataNasc = Output.DoWhile("Digite a data de nascimento (dd/mm/aaaa): ", "Editar data", dataNasc);
+
+         // Atualizar Estado Civil
+         Console.WriteLine($"O estado civil anterior era {estadoCivil} {manter}");
+         Console.WriteLine("Estado Civil:");
+         foreach (int i in Enum.GetValues(typeof(EstadoCivil)))
+         {
+            string n = Enum.GetName(typeof(EstadoCivil), i);
+            Console.WriteLine("{0}- {1}", i, n);
+
+            if (n == estadoCivil)
+               estadoCivil = i.ToString();
+
+         }
+         estadoCivil = Output.DoWhile("Digite o número da opção: ", "Editar opção", estadoCivil, "Estado Civil");
+
+         // Atualizar Naturalidade
+         Console.WriteLine($"A naturalidade anterior era {nat} {manter}");
+         nat = Output.DoWhile("Naturalidade: ", "Editar texto", nat);
+
+         // Atualizar Nacionalidade
+         Console.WriteLine($"A nacionalidade anterior era {nac} {manter}");
+         nac = Output.DoWhile("Nacionalidade: ", "Editar texto", nac);
+
+         // Atualizar Pai
+         Console.WriteLine($"O nome do pai anterior era {pai} {manter}");
+         pai = Output.DoWhile("Nome do Pai: ", "Editar texto", pai);
+
+         // Atualizar Mãe
+         Console.WriteLine($"O nome da mãe anterior era {mae} {manter}");
+         mae = Output.DoWhile("Nome do Mãe: ", "Editar texto", mae);
+
+         // Atualizar E-mail
+         Console.WriteLine($"O e-mail anterior era {email} {manter}");
+         email = Output.DoWhile("E-mail (ex@exemp.lo): ", "Editar email", email);
+
+         // Atualizar Ficha Rápida
+         Console.WriteLine($"A situação da ficha rápida anterior era {fichaRapida} {manter}");
+         Console.WriteLine("Ficha Rápida:");
+         foreach (int i in Enum.GetValues(typeof(FichaRapida)))
+         {
+            string n = Enum.GetName(typeof(FichaRapida), i);
+            Console.WriteLine("{0}- {1}", i, n);
+
+            if (n == fichaRapida)
+               fichaRapida = i.ToString();
+         }
+         fichaRapida = Output.DoWhile("Digite o número da opção: ", "Editar opção", fichaRapida, "Ficha Rápida");
+
+         // Criando objeto
+         Pessoa cliente = new(id, cpf, nome, rg, orgaouf, dataNasc, nat, nac, pai, mae, estadoCivil, fichaRapida, email);
+
+         repositorio.Atualiza(id, cliente);
+
+      }
+
+      public static void Excluir(List<Lib.Classes.Pessoa> list)
+      {
+
+      }
    }
 }

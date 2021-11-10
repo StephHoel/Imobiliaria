@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Lib.Classes;
 using Lib.Methods;
 using Lib.Repositorio;
@@ -9,7 +10,16 @@ namespace App.Methods
    {
       static readonly TelefoneRepositorio repositorio = new();
 
-      protected internal static void NovoTelefone(string cpf)
+      public static void Atualizar(List<Lib.Classes.Telefone> list)
+      {
+
+      }
+      public static void Excluir(List<Lib.Classes.Telefone> list)
+      {
+
+      }
+
+      public static void Novo(string cpf)
       {
          int id = repositorio.ProximoId();
          string novo;

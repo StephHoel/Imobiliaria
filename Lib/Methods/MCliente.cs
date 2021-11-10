@@ -17,7 +17,7 @@ namespace Lib.Methods
 
          if (!resultado) return "";
 
-         else return Encriptografia.Encrypt(Input.NormalizeCpf(cpf.ToString()));
+         else return Encriptografia.Encrypt(NormalizeCpf(cpf.ToString()));
 
       }
 
@@ -30,7 +30,7 @@ namespace Lib.Methods
 
          if (!resultado) return "";
 
-         else return Encriptografia.Encrypt(Input.NormalizeRg(rg.ToString()));
+         else return Encriptografia.Encrypt(NormalizeRg(rg.ToString()));
 
       }
 
@@ -45,5 +45,54 @@ namespace Lib.Methods
          return data.ToString("dd/MM/yyyy");
       }
 
+      public static string NormalizeCpf(string input)
+      {
+         string novo = Normalize(input);
+
+         novo = input[..3] + "."
+              + input.Substring(3, 3) + "."
+              + input.Substring(6, 3) + "-"
+              + input.Substring(9, 2);
+
+         return novo;
+      }
+
+      public static string NormalizeRg(string input)
+      {
+
+         string novo = Normalize(input);
+
+         novo = input[..2] + "."
+              + input.Substring(2, 3) + "."
+              + input.Substring(5, 3) + "-"
+              + input.Substring(8, 1);
+
+         return novo;
+      }
+
+      public static string Normalize(string input)
+      {
+         string novo = input;
+
+         if (input.Split('.').Length > 0)
+         {
+            var verf = input.Split('.');
+            novo = "";
+            foreach (var v in verf)
+               novo += v;
+         }
+
+         if (input.Split('-').Length > 0)
+         {
+            var verf = novo.Split('-');
+            novo = "";
+            foreach (var v in verf)
+               novo += v;
+         }
+
+         return novo;
+      }
+
+      
    }
 }
